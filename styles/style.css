@@ -1,0 +1,81 @@
+.dayGradientBG{
+    height: 100vh;
+    background: conic-gradient(from 124deg at 50% 50%, rgba(205,166,233,1) 4%, #cda6e9fa 25%, rgba(157,219,252,0.98) 42%, rgba(160,220,250,0.97) 77%, rgba(84,103,242,0.97) 89%, rgba(84,103,242,0.97) 92%, rgba(205,166,233,0.97) 99%, rgba(205,166,233,0.96) 100%),
+    linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(167,219,252,1) 100%);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.gridSection{
+    display: grid;
+    grid-template-columns:  1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 4fr 2fr 1fr;
+    height: 80vh;
+    padding-top: 10vh;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.gridSection *{
+    margin: 10px;
+}
+
+.gridSection .location1 {
+    grid-row: 1;
+    grid-column: 1/6;
+    display: grid;
+    grid-template-columns:  1fr 1fr;
+    grid-template-rows:  1fr;
+}
+
+.gridSection .location1 .area1 {
+    background-color: white;
+    grid-column: 1;
+    margin-right: 10px;
+    margin-left: 0px;
+}
+
+.gridSection .location1 .area2 {
+    background-color: white;
+    grid-column: 2;
+    margin-left: 10px;
+    margin-right: 0px;
+}
+
+.gridSection .location2 {
+    background-color: white;
+    opacity: 50%;
+    grid-row: 2;
+    grid-column: 1;
+}
+.gridSection .location3 {
+    background-color: white;
+    opacity: 50%;
+    grid-row: 2;
+    grid-column: 2;
+}
+.gridSection .location4 {
+    background-color: white;
+    opacity: 50%;
+    grid-row: 2;
+    grid-column: 3;
+}
+.gridSection .location5 {
+    background-color: white;
+    opacity: 50%;
+    grid-row: 2;
+    grid-column: 4;
+}
+.gridSection .location6 {
+    background-color: white;
+    opacity: 50%;
+    grid-row: 2;
+    grid-column: 5;
+}
+.gridSection .location7 {
+    background-color: white;
+    opacity: 50%;
+    grid-row: 3;
+    grid-column: 2/5;
+}
