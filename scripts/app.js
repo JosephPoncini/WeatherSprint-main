@@ -56,6 +56,8 @@ navigator.geolocation.getCurrentPosition(success, errorFunc);
 let lat;
 let lon;
 
+let place;
+
 let dt;
 let date;
 let currentTemp;
@@ -80,7 +82,7 @@ let weather8am;
 let temp12pm;
 let weather12pm;
 let temp8pm;
-let weather7pm;
+let weather8pm;
 
 let day1Name;
 let day1High;
@@ -112,6 +114,8 @@ let firstTime;
 let lastTime;
 let endTime;
 
+let sunset;
+let sunrise;
 //#endregion
 
 function success(position) {
@@ -134,15 +138,25 @@ async function GetCurrentWeatherData() {
 
     console.log(data);
 
+    place = data.name;
+
     dt = data.dt;
     timeZone = data.timezone;
+  
+    sunset = data.sys.sunset + timeZone;
+    console.log("Sunset is at " + convertSecondsToHHMM(sunset));
+
+    sunrise = data.sys.sunrise +timeZone;
+    console.log("Sunrise is at " + convertSecondsToHHMM(sunrise));
+
     date = convertUnixTimeToDate(dt + timeZone);
     currentTemp = data.main.temp;
     currentTime = convertSecondsToHHMM(dt + timeZone);
     // todaysHigh = data.main.temp_max;
     // todaysLow = data.main.temp_min;
     currentWeatherMain = data.weather[0].main;
-    currentWeatherDescription = data.weather[0].description;
+    currentWeatherDescription = data.weather[0].main;
+
 
 
     //----------------------------------------------GetDaysofWeek
@@ -155,6 +169,7 @@ async function GetCurrentWeatherData() {
 
     //----------------------------------------------Console Logging
 
+    console.log("We are in " + place)
     console.log("The latitude is " + lat);
     console.log("The longitude is " + lon);
     console.log(`Today is ${currentDayOfTheWeek.day}, ${currentDayOfTheWeek.date}`)
@@ -165,7 +180,7 @@ async function GetCurrentWeatherData() {
     console.log(`Day 5 is ${day5Name.day}, ${day5Name.date}`);
 
     console.log("The date is " + date);
-    console.log("The time is " + currentTime);
+    console.log("The time is " + convertToNormalTime(currentTime));
     console.log("Your timezone is: " + timeZone);
     console.log("The current Temperature is " + currentTemp + " " + unit);
     // console.log("The max temp today is: " + todaysHigh +  " " + unit);
@@ -175,14 +190,16 @@ async function GetCurrentWeatherData() {
 
     //------------------------------------------------Displaying values
 
+    placeID.innerText = place.toUpperCase();
     currentWeatherTempID.innerText = Math.round(currentTemp) + unit;
-    currentWeatherDescriptionID.innerText = currentWeatherDescription;
+    currentWeatherDescriptionID.innerText = currentWeatherDescription.toLowerCase();
     day1NameID.innerText = `${day1Name.day} ${day1Name.date}`;
     day2NameID.innerText = `${day2Name.day} ${day2Name.date}`;
     day3NameID.innerText = `${day3Name.day} ${day3Name.date}`;
     day4NameID.innerText = `${day4Name.day} ${day4Name.date}`;
     day5NameID.innerText = `${day5Name.day} ${day5Name.date}`;
-    currentWeatherIconID.innerText = Description2Icon(currentWeatherMain);
+    currentWeatherIconID.innerText = Description2Icon(currentWeatherMain, dt + timeZone);
+    timeID.innerText = convertToNormalTime(currentTime);
     
 }
 
@@ -317,7 +334,7 @@ async function GetFiveDayData() {
     console.log(maxTemps);
     console.log(minTemps);
 
-    //---------------------------------------Get 8am 12pm 8pm temps
+    //---------------------------------------Get 8am 12pm 8pm temps and weather
 
     switch (hourOffset) {
         case 0:
@@ -339,6 +356,11 @@ async function GetFiveDayData() {
             break;
     }
 
+    let todaysWeatherForecast = DetermineTodaysWeather(weathers, n);
+    weather8am = todaysWeatherForecast.weather8am;
+    weather12pm = todaysWeatherForecast.weather12pm;
+    weather8pm = todaysWeatherForecast.weather8pm;
+
 
     //------------------------------------- Getting Forecasted Weather
 
@@ -355,8 +377,11 @@ async function GetFiveDayData() {
 
     //------------------------------------- Console Logging
     console.log("At 8am today the temp is " + temp8am + " C")
+    console.log("At 8am today the weather will be " + weather8am)
     console.log("At 12pm today the temp is " + temp12pm + " C")
+    console.log("At 12pm today the weather will be " + weather12pm)
     console.log("At 8pm today the temp is " + temp8pm + " C")
+    console.log("At 8pm today the weather will be " + weather8pm)
 
     console.log("The max temp today is: " + todaysHigh +  " " + unit);
     console.log("The min temp today is: " + todaysLow +  " " + unit);
@@ -382,15 +407,24 @@ async function GetFiveDayData() {
 
     // -----------------------------------Displaying values
 
-    currentHLID.innerText = `H:${Math.round(todaysHigh)}${unit} L:${Math.round(todaysLow)}${unit}`; 
-    temp8amID.innerText = Math.round(temp8am)+unit;
-    temp12pmID.innerText = Math.round(temp12pm)+unit;
-    temp8pmID.innerText = Math.round(temp8pm)+unit;
+    currentHLID.innerText = `H: ${Math.round(todaysHigh)}${unit} L:${Math.round(todaysLow)}${unit}`; 
+    temp8amID.innerText = Math.round(temp8am)+"°";
+    temp12pmID.innerText = Math.round(temp12pm)+"°";
+    temp8pmID.innerText = Math.round(temp8pm)+"°";
     day1HLID.innerText = `${Math.round(day1High)}${unit} | ${Math.round(day1Low)}${unit}`;
     day2HLID.innerText = `${Math.round(day2High)}${unit} | ${Math.round(day2Low)}${unit}`;
     day3HLID.innerText = `${Math.round(day3High)}${unit} | ${Math.round(day3Low)}${unit}`;
     day4HLID.innerText = `${Math.round(day4High)}${unit} | ${Math.round(day4Low)}${unit}`;
     day5HLID.innerText = `${Math.round(day5High)}${unit} | ${Math.round(day5Low)}${unit}`;
+    day1WeatherIconID.innerText = Description2Icon(day1Weather,  60*60*12);
+    day2WeatherIconID.innerText = Description2Icon(day2Weather,  60*60*12);
+    day3WeatherIconID.innerText = Description2Icon(day3Weather,  60*60*12);
+    day4WeatherIconID.innerText = Description2Icon(day4Weather,  60*60*12);
+    day5WeatherIconID.innerText = Description2Icon(day5Weather,  60*60*12);
+    
+    weatherIcon8amID.innerText = Description2Icon(weather8am, 60*60*8);
+    weatherIcon12pmID.innerText = Description2Icon(weather12pm, 60*60*12);
+    weatherIcon8pmID.innerText = Description2Icon(weather8pm, 60*60*20);
 }
 
 function GetCurrentDay(dt) {
@@ -524,14 +558,21 @@ function linearRegression(x, y) { //Got help at the following link https://study
     return { slope, intercept };
 }
 
-function Description2Icon(description){
+function Description2Icon(description, dt){
+
+    nightTime = false;
+    if((dt%86400) > (sunset%86400) || (dt%86400) < (sunrise%86400)){
+        nightTime = true;
+    }
 
     let weatherOptions = ['Tornado', 'Snow', 'Thunderstorm', 'Rain', 'Drizzle', 'Mist', 'Smoke', 'Haze', 'Dust', 'Fog', 'Sand', 'Ash', 'Squall', 'Clouds', 'Clear'];
     let weatherIcons =   ['?' ,       'I' ,       'Y',         'U',     'W',     'Z',     'Z',     'Z',    'Z',   'Z',    'Z',   'Z',     'Z',      '3',     '1'  ];
 
     for(let i = 0; i<weatherOptions.length; i++){
+        
         if(description == weatherOptions[i]){
-            if(weatherIcons[i] == 1 && nightMode){
+            
+            if(weatherIcons[i] == 1 && nightTime){
                 return 6;
             }else{
                 return weatherIcons[i];
@@ -542,6 +583,31 @@ function Description2Icon(description){
 
     return "---";
 }
+
+function DetermineTodaysWeather(weathers, n){
+    let weather8am;
+    let weather12pm;
+    let weather8pm;
+    if(n < 3){
+        weather8am = weathers[2-n];
+        weather12pm = weathers[4-n];
+        weather8pm = weathers[6-n];
+    }else if(n < 5){
+        weather8am = weathers[10-n];
+        weather12pm = weathers[4-n];
+        weather8pm = weathers[6-n];
+    }else if(n < 7){
+        weather8am = weathers[10-n];
+        weather12pm = weathers[12-n];
+        weather8pm = weathers[6-n];
+    }else{
+        weather8am = weathers[10-n];
+        weather12pm = weathers[12-n];
+        weather8pm = weathers[14-n];
+    }
+    return{weather8am, weather12pm, weather8pm};
+}
+
 
 function DetermineForecastedWeather(weathers, dayNumber, m) {
     weatherOptions = ['Tornado', 'Snow', 'Thunderstorm', 'Rain', 'Drizzle', 'Mist', 'Smoke', 'Haze', 'Dust', 'Fog', 'Sand', 'Ash', 'Squall', 'Clouds', 'Clear'];
@@ -592,4 +658,19 @@ function convertDateFormat(dateString) { //Got help from ChatGPT to make this fu
     }
     
     return null; // Return null if the month abbreviation is not found
-  }
+}
+
+function convertToNormalTime(militaryTime) {
+    let hour = parseInt(militaryTime.substring(0, 2), 10);
+    let minute = militaryTime.substring(3);
+  
+    let period = (hour >= 12) ? 'PM' : 'AM';
+  
+    if (hour === 0) {
+      hour = 12; // 12 AM
+    } else if (hour > 12) {
+      hour = hour - 12; // Convert to 12-hour format
+    }
+  
+    return `${hour}:${minute} ${period}`;
+}
