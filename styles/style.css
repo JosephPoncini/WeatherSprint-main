@@ -1,10 +1,14 @@
 @font-face { font-family:Artill; src: url("../fonts/artill clean weather icons Regular"); }
+@font-face { font-family:PhilosopherBold; src: url("../fonts/Philosopher-Bold.ttf"); }
+@font-face { font-family:RobotoLight; src: url("../fonts/Roboto-Light.ttf"); }
+@font-face { font-family:RobotoMedium; src: url("../fonts/Roboto-Medium.ttf"); }
 
 
 .dayGradientBG{
-    height: 100vh;
-    background: conic-gradient(from 124deg at 50% 50%, rgba(205,166,233,1) 4%, #cda6e9fa 25%, rgba(157,219,252,0.98) 42%, rgba(160,220,250,0.97) 77%, rgba(84,103,242,0.97) 89%, rgba(84,103,242,0.97) 92%, rgba(205,166,233,0.97) 99%, rgba(205,166,233,0.96) 100%),
-    linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(167,219,252,1) 100%);
+    height: 110vh;
+    background: linear-gradient(330deg, rgba(255,255,255,0) 0%, rgba(180,214,248,0) 36%, rgba(176,212,248,0.06) 38%, rgba(176,212,248,1) 66%),
+    linear-gradient(208deg, rgba(207,165,232,0) 0%, rgba(207,162,231,0) 39%, rgba(207,161,231,1) 56%, rgba(207,159,231,1) 100%),
+    linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(226,230,252,0) 17%, rgba(102,123,241,1) 90%, rgba(86,109,240,1) 100%);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -97,6 +101,9 @@
 .gridSection .location1 .area2 .sublocation1{
     grid-row: 1;
     grid-column: 1;
+    font-family: RobotoLight;
+    font-size: 20px;
+    color: gray;
 }
 
 .gridSection .location1 .area2 .sublocation2{
@@ -215,4 +222,70 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#placeID{
+    font-family: RobotoLight;
+    font-size: 20px;
+    color: gray;
+}
+
+#currentWeatherTempID{
+    font-family: PhilosopherBold;
+    font-size: 100px;
+}
+
+#currentWeatherDescriptionID{
+    font-family: PhilosopherBold;
+    font-size:20px;
+    color: gray;
+}
+
+#currentHLID{
+    font-family: PhilosopherBold;
+    font-size:20px;
+    color: gray;
+}
+
+#timeID{
+    font-family: RobotoLight;
+    font-size: 20px;
+    color: gray;
+}
+
+.time{
+    font-family: RobotoLight;
+    font-size: 20px;
+}
+
+#temp8amID{
+    font-family: PhilosopherBold;
+    font-size:40px;
+    color: #454545
+}
+
+#temp12pmID{
+    font-family: PhilosopherBold;
+    font-size:40px;
+    color: #454545
+}
+
+#temp8pmID{
+    font-family: PhilosopherBold;
+    font-size:40px;
+    color: #454545
+}
+
+.day{
+    font-family: RobotoLight;
+    font-size: 16px;
+}
+
+.HighLow{
+    font-family: RobotoMedium;
+    font-size: 16px;
+}
+
+#currentWeatherIconID{
+    font-family: Artill;
 }
