@@ -6,15 +6,21 @@
 @font-face { font-family:RobotoMedium; src: url("../fonts/Roboto-Medium.ttf"); }
 @font-face { font-family:RobotoBold; src: url("../fonts/Roboto-Bold.ttf"); }
 
-body{
-    background: linear-gradient(330deg, rgba(255,255,255,0) 0%, rgba(180,214,248,0) 36%, rgba(176,212,248,0.06) 38%, rgba(176,212,248,1) 66%),
+.body{
+    z-index: -999;
+}
+
+.bg{
+        background: linear-gradient(330deg, rgba(255,255,255,0) 0%, rgba(180,214,248,0) 36%, rgba(176,212,248,0.06) 38%, rgba(176,212,248,1) 66%),
     linear-gradient(208deg, rgba(207,165,232,0) 0%, rgba(207,162,231,0) 39%, rgba(207,161,231,1) 56%, rgba(207,159,231,1) 100%),
     linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(226,230,252,0) 17%, rgba(102,123,241,1) 90%, rgba(86,109,240,1) 100%);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;    
-    height: auto;
+    height: max-content;
     background-attachment: fixed;
+    z-index: -2;
+    /* overflow: hidden; */
 }
 
 .gridSection{
@@ -24,7 +30,7 @@ body{
     display: grid;
     grid-template-columns:  200px 200px 200px 200px 200px;
     grid-template-rows: 350px 185px 275px 80px;
-    height: 80vh;
+    height: max-content;
     padding-top: 10vh;
 }
 
@@ -234,6 +240,8 @@ background-color: rgba(256,256,256,.5);
     grid-column: 2/5;
     margin: 10px;
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
     align-self: self-start;
     align-items: start;
@@ -244,6 +252,8 @@ background-color: rgba(256,256,256,.5);
     grid-column: 2/5;
     margin: 20px;
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
     align-self: self-start;
     align-items: start;
@@ -481,7 +491,7 @@ background-color: rgba(256,256,256,.5);
     top: 0;
     left: 0;
     width: 420px; /* Adjust width as needed */
-    height: 110vh;
+    height: 100%;
     background-color: rgba(250,250,250,0.7);
     background-attachment: fixed;
     padding-left: 20px;
@@ -534,5 +544,18 @@ background-color: rgba(256,256,256,.5);
     overflow-y: auto; /* Enable vertical scrolling */
     z-index: 999; /* Ensure the side container appears above the content */
     padding-right: 20px;
+    z-index: 1;
+  }
 
+  .sun{
+    position: absolute;
+    left: -120vh;
+    bottom: -75vh;
+    width: 275vh;
+    height: auto;
+    z-index: -1;
+  }
+
+  .footer{
+    height: 200px;
   }

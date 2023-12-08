@@ -17,6 +17,30 @@ if (imperial) {
     unit = "°C"
 }
 
+function ChangeUnits(){
+
+
+    let changeUnitsID = document.getElementById("changeUnitsID");
+
+    if (imperial) {
+        units = 'imperial';
+        unit = "°F";
+        changeUnitsID.innerText = "temperature view: Celsius (click to change)";  
+        imperial =false;              
+    } else {
+        units = "metric";
+        unit = "°C"; 
+        changeUnitsID.innerText = "temperature view: Fahrenheit (click to change)";
+        imperial = true;    
+    }
+    
+
+
+
+    APICall1();
+    APICall2();
+}
+
 function search(){
     APICall1Search();
     APICall2Search();
@@ -241,6 +265,8 @@ async function APICall2() {
 
 function GetCurrentWeatherData(data) {
 
+    lat = data.coord.lat;
+    lon = data.coord.lon;
 
     console.log(data);
 

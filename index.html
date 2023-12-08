@@ -12,6 +12,8 @@
 
 <body>
 
+
+
   <div class="container-fluid d-flex justify-content-center" style="background-color: #f8f9fa; ">
     <nav class="navbar bg-body-tertiary">
       <div class="container-fluid">
@@ -26,7 +28,11 @@
 
 
 
-  <div class="container-fluid" style=" position: relative; height: auto;">
+
+
+  <div class="container-fluid bg" style=" position: relative; height: max-content; overflow: hidden; z-index: 1;">
+  <img class="sun" src="./assets/Sun.png" alt="Sun">
+
     <div id="side-containerID" class="side-container" style="display: none;">
       <div class="container d-flex justify-content-between" style="padding: 0px; margin-bottom:25px;">
         <div class="title">YOUR FAVORITE CITIES</div>
@@ -197,9 +203,10 @@
 
       <div id="openFavoritesBtn" class="location7">
         <button onclick="OpenFavorites()" style="opacity: 75%; width: 350px; color: gray;" type="button"
-          class="btn btn-light"> ♥ Open your
+          class="btn btn-light align-self-center align-items-center"> ♥ Open your
           favorite
           places</button>
+          <div onclick="ChangeUnits()" id="changeUnitsID" class="d-flex align-self-center p-3" style="color: white;">temperature view: Fahrenheit (click to change)</div>
       </div>
 
       <div id="day1Forecast" class="location8" style="display: none;">
@@ -334,13 +341,20 @@
 
 
     </div>
+
+
+  <div class="container-fluid footer d-flex justify-content-center" style="color: white; margin-top: 30px;">
+    Handcrafted by Joseph
   </div>
+
+  </div>
+
 
 
   <!-- regression line script -->
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/regression/1.4.1/regression.min.js"></script> -->
 
-  <script src="/scripts/app.js"></script>
+  <script type="module" src="/scripts/app.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
     crossorigin="anonymous"></script>
