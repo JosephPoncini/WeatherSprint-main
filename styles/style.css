@@ -549,9 +549,9 @@ background-color: rgba(256,256,256,.5);
 
   .sun{
     position: absolute;
-    left: -120vh;
+    left: -1550px;
     bottom: -75vh;
-    width: 275vh;
+    width: 3400px;
     height: auto;
     z-index: -1;
   }

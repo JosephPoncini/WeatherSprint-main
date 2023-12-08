@@ -138,6 +138,12 @@ let DayOfTheWeek5_8amTemp = document.getElementById("DayOfTheWeek5_8amTemp");
 let DayOfTheWeek5_12pmTemp = document.getElementById("DayOfTheWeek5_12pmTemp");
 let DayOfTheWeek5_8pmTemp = document.getElementById("DayOfTheWeek5_8pmTemp");
 
+let DayOfTheWeek1_ForecastDescription = document.getElementById("DayOfTheWeek1_ForecastDescription");
+let DayOfTheWeek2_ForecastDescription = document.getElementById("DayOfTheWeek2_ForecastDescription");
+let DayOfTheWeek3_ForecastDescription = document.getElementById("DayOfTheWeek3_ForecastDescription");
+let DayOfTheWeek4_ForecastDescription = document.getElementById("DayOfTheWeek4_ForecastDescription");
+let DayOfTheWeek5_ForecastDescription = document.getElementById("DayOfTheWeek5_ForecastDescription");
+
 //flag-------------------------------------------------------------------------------------------------------------------
 
 
@@ -631,7 +637,11 @@ function GetFiveDayData(data) {
     DayOfTheWeek5_12pmTemp.innerText = Math.round(day5WeatherTemps.temp12pm) + "°";
     DayOfTheWeek5_8pmTemp.innerText = Math.round(day5WeatherTemps.temp8pm) + "°";
 
-
+    DayOfTheWeek1_ForecastDescription.innerText = day1Weather;
+    DayOfTheWeek2_ForecastDescription.innerText = day2Weather;
+    DayOfTheWeek3_ForecastDescription.innerText = day3Weather;
+    DayOfTheWeek4_ForecastDescription.innerText = day4Weather;
+    DayOfTheWeek5_ForecastDescription.innerText = day5Weather;
 
 
     //flag-------------------------------------------------------------------------------------------------------------------------------
@@ -1158,3 +1168,4 @@ function GetWeatherTemp(hourOffset, dayNumber) {
 
     return { temp8am, temp12pm, temp8pm };
 }
+

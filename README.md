@@ -4,8 +4,10 @@
 
  // Weather Sprint
 
- // Called APIs to create a weather webite depicting current weather and and forecated weather
+ // Called APIs to create a weather webite depicting current weather and and forecated weather in a fashionable style
 
  //
 
-// Peer Review:
+//
+
+//
