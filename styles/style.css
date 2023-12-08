@@ -324,5 +324,5 @@
     line-height: 100px;
     margin-bottom: -15px;
     margin-top: -20px;
-    color: black;
+    color: black !important;
 }
