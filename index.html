@@ -1,47 +1,161 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>climate.xchange</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="./styles/style.css">
-  </head>
-  <body class="dayGradientBG">
 
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>climate.xchange</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="./styles/style.css">
+</head>
+
+<body class="dayGradientBG" style="overflow: hidden;">
+
+  <div class="container-fluid d-flex justify-content-center" style="background-color: #f8f9fa;  overflow: hidden;">
     <nav class="navbar bg-body-tertiary">
       <div class="container-fluid">
-        <a class="navbar-brand">Navbar</a>
+        <a class="navbar-brand">climate.xchange</a>
         <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
+          <input class="form-control me-2" type="search" placeholder="Search for a City" aria-label="Search">
+          <img onclick="search()" id="searchBtnID" src="./assets/SearchBtn.png" alt="search icon">
         </form>
       </div>
     </nav>
+  </div>
+
+
+
+  <div class="container-fluid" style="overflow: hidden; position: relative; height:100%">
+    <div id="side-containerID" class="side-container">
+      <div class="container d-flex justify-content-between" style="padding: 0px; margin-bottom:25px;">
+        <div class="title">YOUR FAVORITE CITIES</div>
+        <img onclick="CloseGrandParent(this)" class="exitFavoritesBtn" src="./assets/Ps-x-button.png" alt="Exit btn">
+      </div>
+      <div class="container" style="padding: 0; position: relative; height:100%">
+        <div class="slider">
+
+          <div class="container" style="padding-left: 0; padding-right: 20px; margin-bottom: 20px;">
+            <div class="favoritedCity container">
+              <div class="text">Stockton, California</div>
+              <img onclick="RemoveParent(this)" class="x" src="./assets/X.png" alt="X">
+            </div>
+          </div>
+
+          <div class="container" style="padding-left: 0; padding-right: 20px; margin-bottom: 20px;">
+            <div class="favoritedCity container">
+              <div class="text">Stockton, California</div>
+              <img onclick="RemoveParent(this)" class="x" src="./assets/X.png" alt="X">
+            </div>
+          </div>
+
+          <div class="container" style="padding-left: 0; padding-right: 20px; margin-bottom: 20px;">
+            <div class="favoritedCity container">
+              <div class="text">Stockton, California</div>
+              <img onclick="RemoveParent(this)" class="x" src="./assets/X.png" alt="X">
+            </div>
+          </div>
+
+          <div class="container" style="padding-left: 0; padding-right: 20px; margin-bottom: 20px;">
+            <div class="favoritedCity container">
+              <div class="text">Stockton, California</div>
+              <img onclick="RemoveParent(this)" class="x" src="./assets/X.png" alt="X">
+            </div>
+          </div>
+
+          <div class="container" style="padding-left: 0; padding-right: 20px; margin-bottom: 20px;">
+            <div class="favoritedCity container">
+              <div class="text">Stockton, California</div>
+              <img onclick="RemoveParent(this)" class="x" src="./assets/X.png" alt="X">
+            </div>
+          </div>
+
+          <div class="container" style="padding-left: 0; padding-right: 20px; margin-bottom: 20px;">
+            <div class="favoritedCity container">
+              <div class="text">Stockton, California</div>
+              <img onclick="RemoveParent(this)" class="x" src="./assets/X.png" alt="X">
+            </div>
+          </div>
+
+          <div class="container" style="padding-left: 0; padding-right: 20px; margin-bottom: 20px;">
+            <div class="favoritedCity container">
+              <div class="text">Stockton, California</div>
+              <img onclick="RemoveParent(this)" class="x" src="./assets/X.png" alt="X">
+            </div>
+          </div>
+
+          <div class="container" style="padding-left: 0; padding-right: 20px; margin-bottom: 20px;">
+            <div class="favoritedCity container">
+              <div class="text">Stockton, California</div>
+              <img onclick="RemoveParent(this)" class="x" src="./assets/X.png" alt="X">
+            </div>
+          </div>
+
+          <div class="container" style="padding-left: 0; padding-right: 20px; margin-bottom: 20px;">
+            <div class="favoritedCity container">
+              <div class="text">Stockton, California</div>
+              <img onclick="RemoveParent(this)" class="x" src="./assets/X.png" alt="X">
+            </div>
+          </div>
+
+          <div class="container" style="padding-left: 0; padding-right: 20px; margin-bottom: 20px;">
+            <div class="favoritedCity container">
+              <div class="text">Stockton, California</div>
+              <img onclick="RemoveParent(this)" class="x" src="./assets/X.png" alt="X">
+            </div>
+          </div>
+
+          <div class="container" style="padding-left: 0; padding-right: 20px; margin-bottom: 20px;">
+            <div class="favoritedCity container">
+              <div class="text">Stockton, California</div>
+              <img onclick="RemoveParent(this)" class="x" src="./assets/X.png" alt="X">
+            </div>
+          </div>
+
+          <div class="container" style="padding-left: 0; padding-right: 20px; margin-bottom: 20px;">
+            <div class="favoritedCity container">
+              <div class="text">Stockton, California</div>
+              <img onclick="RemoveParent(this)" class="x" src="./assets/X.png" alt="X">
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>
+
+
+    </div>
+
 
     <div class="container gridSection">
       <div class="location1">
         <div class="area1">
           <div id="placeID" class="sublocation1">[place]</div>
-          <div id="heartID" class="sublocation2">[♥]</div>
+          <div id="heartID" class="sublocation2 image-container">
+            <img onclick="changeImage()" id="favoriteBtnID" src="./assets/FavoriteIcon.png" alt="">
+          </div>
           <div class="sublocation3">
             <div id="currentWeatherIconID">[sun]</div>
             <div id="currentWeatherTempID" class="temp">[temp]</div>
           </div>
-          <div id="currentWeatherDescriptionID" class="sublocation4"style="text-align: center;">[weather description]</div>
+          <div id="currentWeatherDescriptionID" class="sublocation4" style="text-align: center;">[weather description]
+          </div>
           <div id="currentHLID" class="sublocation5">[H: | L:]</div>
         </div>
         <div class="area2">
-          <div class="sublocation1"><strong>TODAY</strong></div>
+          <div class="sublocation1">TODAY</div>
           <div id="timeID" class="sublocation2">[Time]</div>
           <div class="sublocation3">
             <div class="time">8am</div>
-            <div id="weatherIcon8amID" class="weatherIconForecastedToday"style="text-align: center;">[weather Icon]</div>
+            <div id="weatherIcon8amID" class="weatherIconForecastedToday" style="text-align: center;">[weather Icon]
+            </div>
             <div id="temp8amID" class="temp">[temp]</div>
           </div>
           <div class="sublocation4">
             <div class="time">noon</div>
-            <div id="weatherIcon12pmID" class="weatherIconForecastedToday" style="text-align: center;">[weather Icon]</div>
+            <div id="weatherIcon12pmID" class="weatherIconForecastedToday" style="text-align: center;">[weather Icon]
+            </div>
             <div id="temp12pmID" class="temp">[temp]</div>
           </div>
           <div class="sublocation5">
@@ -78,15 +192,22 @@
         <div id="day5HLID" class="HighLow">[HL]</div>
       </div>
       <div class="location7">
-        <button style="opacity: 75%; width: 350px; color: gray;" type="button" class="btn btn-light"> ♥ Open your favorite places</button>
+        <button onclick="OpenFavorites()" style="opacity: 75%; width: 350px; color: gray;" type="button" class="btn btn-light"> ♥ Open your
+          favorite
+          places</button>
       </div>
-  
+
     </div>
+  </div>
 
-    <!-- regression line script -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/regression/1.4.1/regression.min.js"></script> -->
 
-    <script src="/scripts/app.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-  </body>
+  <!-- regression line script -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/regression/1.4.1/regression.min.js"></script> -->
+
+  <script src="/scripts/app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+</body>
+
 </html>

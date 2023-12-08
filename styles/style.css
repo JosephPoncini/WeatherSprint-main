@@ -4,10 +4,11 @@
 @font-face { font-family:RobotoThin; src: url("../fonts/Roboto-Thin.ttf"); }
 @font-face { font-family:RobotoLight; src: url("../fonts/Roboto-Light.ttf"); }
 @font-face { font-family:RobotoMedium; src: url("../fonts/Roboto-Medium.ttf"); }
+@font-face { font-family:RobotoBold; src: url("../fonts/Roboto-Bold.ttf"); }
 
 
 .dayGradientBG{
-    height: 110vh;
+    height: 100vh;
     background: linear-gradient(330deg, rgba(255,255,255,0) 0%, rgba(180,214,248,0) 36%, rgba(176,212,248,0.06) 38%, rgba(176,212,248,1) 66%),
     linear-gradient(208deg, rgba(207,165,232,0) 0%, rgba(207,162,231,0) 39%, rgba(207,161,231,1) 56%, rgba(207,159,231,1) 100%),
     linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(226,230,252,0) 17%, rgba(102,123,241,1) 90%, rgba(86,109,240,1) 100%);
@@ -22,7 +23,7 @@
     align-items: center;
     display: grid;
     grid-template-columns:  200px 200px 200px 200px 200px;
-    grid-template-rows: 350px 175px 100px;
+    grid-template-rows: 350px 185px 275px 80px;
     height: 80vh;
     padding-top: 10vh;
 }
@@ -112,6 +113,11 @@
     font-family: RobotoThin;
     font-size: 25px;
     color: #454545;
+    letter-spacing: 4px;
+
+    font-family: RobotoLight;
+    font-size: 30px;
+    color: gray;
     letter-spacing: 4px;
 }
 
@@ -231,7 +237,18 @@
     margin: 10px;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-self: self-start;
+    align-items: start;
+}
+
+.gridSection .location7B {
+    grid-row: 4;
+    grid-column: 2/5;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-self: self-start;
+    align-items: start;
 }
 
 #placeID{
@@ -313,16 +330,104 @@
 
 .weatherIconForecastedToday{
     font-family: Artill;
-    font-size: 120px;
+    font-size: 120px !important;
     line-height: 100px;
     margin-bottom: -15px;
+    margin-left: 0px !important;
 }
 
 .weatherIcon{
     font-family: Artill;
-    font-size: 60px;
+    font-size: 60px; 
     line-height: 100px;
     margin-bottom: -15px;
     margin-top: -20px;
     color: black !important;
 }
+
+#favoriteBtnID{
+    width: 35px ;
+    height: auto;
+    margin-right: -20px;
+    background-image: src("../assets/FavoriteIcon.png");
+}
+
+.navbar{
+    width: 1000px;
+    height: 10vh;
+}
+
+.navbar-brand{
+    font-family: PhilosopherBold;
+    font-size:40px;
+    color: grey
+}
+
+#searchBtnID{
+    width: 50px;
+    height: auto;
+
+}
+
+.form-control{
+    width: 330px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    color:  #939393;
+}
+
+.side-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 420px; /* Adjust width as needed */
+    height: 100%;
+    background-color: rgba(250,250,250,0.7);
+    padding: 20px;
+    z-index: 999; /* Ensure the side container appears above the content */
+
+
+  }
+
+  .side-container .title{
+    font-family: RobotoMedium;
+    font-size: 20px;
+  }
+
+  .side-container .exitFavoritesBtn{
+    width: 30px;
+    height: auto;
+  }
+
+  .side-container .favoritedCity{
+    height: 60px;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 20px;
+    margin-right: 20px;
+    border-radius: 10px;
+  }
+
+  .side-container .favoritedCity .text{
+    color: #707070;
+    font-family: RobotoBold;
+    font-size: 20px;
+
+  }
+
+  .side-container .favoritedCity .x{
+    width: 20px;
+  }
+
+  .side-container .slider{
+    position: absolute;
+    left: 0;
+    width: 400px; /* Adjust width as needed */
+    height: 86%;
+    overflow-y: auto; /* Enable vertical scrolling */
+    z-index: 999; /* Ensure the side container appears above the content */
+    padding-right: 20px;
+
+  }

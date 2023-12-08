@@ -4,16 +4,16 @@ let imperial = true;
 let nightMode = false;
 
 let units
-if(imperial){
+if (imperial) {
     units = 'imperial';
-}else{
+} else {
     units = "metric";
 }
 
 let unit;
-if(imperial){
+if (imperial) {
     unit = "°F";
-}else{
+} else {
     unit = "°C"
 }
 
@@ -142,11 +142,11 @@ async function GetCurrentWeatherData() {
 
     dt = data.dt;
     timeZone = data.timezone;
-  
+
     sunset = data.sys.sunset + timeZone;
     console.log("Sunset is at " + convertSecondsToHHMM(sunset));
 
-    sunrise = data.sys.sunrise +timeZone;
+    sunrise = data.sys.sunrise + timeZone;
     console.log("Sunrise is at " + convertSecondsToHHMM(sunrise));
 
     date = convertUnixTimeToDate(dt + timeZone);
@@ -200,7 +200,7 @@ async function GetCurrentWeatherData() {
     day5NameID.innerText = `${day5Name.day} ${day5Name.date}`;
     currentWeatherIconID.innerText = Description2Icon(currentWeatherMain, dt + timeZone, currentWeatherIconID);
     timeID.innerText = convertToNormalTime(currentTime);
-    
+
 }
 
 
@@ -246,7 +246,7 @@ async function GetFiveDayData() {
             y[j] = midTemps[(8 - n) + (j * 8) + i];
         }
         let regressionLine = linearRegression(x, y);
-        earlyTemps[i] =  parseFloat((regressionLine.slope * earlierTime[i] + regressionLine.intercept).toFixed(3));
+        earlyTemps[i] = parseFloat((regressionLine.slope * earlierTime[i] + regressionLine.intercept).toFixed(3));
     }
 
     let earlyMaxTemps = [];
@@ -258,7 +258,7 @@ async function GetFiveDayData() {
             y[j] = midMaxTemps[(8 - n) + (j * 8) + i];
         }
         let regressionLine = linearRegression(x, y);
-        earlyMaxTemps[i] =  parseFloat((regressionLine.slope * earlierTime[i] + regressionLine.intercept).toFixed(3));
+        earlyMaxTemps[i] = parseFloat((regressionLine.slope * earlierTime[i] + regressionLine.intercept).toFixed(3));
     }
 
     let earlyMinTemps = [];
@@ -270,7 +270,7 @@ async function GetFiveDayData() {
             y[j] = midMinTemps[(8 - n) + (j * 8) + i];
         }
         let regressionLine = linearRegression(x, y);
-        earlyMinTemps[i] =  parseFloat((regressionLine.slope * earlierTime[i] + regressionLine.intercept).toFixed(3));
+        earlyMinTemps[i] = parseFloat((regressionLine.slope * earlierTime[i] + regressionLine.intercept).toFixed(3));
     }
 
     let m = (endTime - lastTime) / 10800; // number of three hour segments from last given time slot to midnight of the following day
@@ -290,7 +290,7 @@ async function GetFiveDayData() {
             y[j] = midMaxTemps[(8 - m) + (j * 8) + i];
         }
         let regressionLine = linearRegression(x, y);
-        laterMaxTemps[i - 1] =  parseFloat((regressionLine.slope * laterTime[i - 1] + regressionLine.intercept).toFixed(3));
+        laterMaxTemps[i - 1] = parseFloat((regressionLine.slope * laterTime[i - 1] + regressionLine.intercept).toFixed(3));
     }
 
     let laterMinTemps = [];
@@ -316,7 +316,7 @@ async function GetFiveDayData() {
     timeArray = [...earlierTime, ...midTimes, ...laterTime];
 
     //---------------------------------------Get Highs and Lows
-    
+
     todaysHigh = GetDaysMaxTemp(maxTemps, 0);
     day1High = GetDaysMaxTemp(maxTemps, 1);
     day2High = GetDaysMaxTemp(maxTemps, 2);
@@ -383,8 +383,8 @@ async function GetFiveDayData() {
     console.log("At 8pm today the temp is " + temp8pm + " C")
     console.log("At 8pm today the weather will be " + weather8pm)
 
-    console.log("The max temp today is: " + todaysHigh +  " " + unit);
-    console.log("The min temp today is: " + todaysLow +  " " + unit);
+    console.log("The max temp today is: " + todaysHigh + " " + unit);
+    console.log("The min temp today is: " + todaysLow + " " + unit);
 
     console.log("Day 1 Max Temp is " + day1High);
     console.log("Day 1 Min Temp is " + day1Low);
@@ -407,24 +407,24 @@ async function GetFiveDayData() {
 
     // -----------------------------------Displaying values
 
-    currentHLID.innerText = `H: ${Math.round(todaysHigh)}${unit} L:${Math.round(todaysLow)}${unit}`; 
-    temp8amID.innerText = Math.round(temp8am)+"°";
-    temp12pmID.innerText = Math.round(temp12pm)+"°";
-    temp8pmID.innerText = Math.round(temp8pm)+"°";
+    currentHLID.innerText = `H: ${Math.round(todaysHigh)}${unit} L:${Math.round(todaysLow)}${unit}`;
+    temp8amID.innerText = Math.round(temp8am) + "°";
+    temp12pmID.innerText = Math.round(temp12pm) + "°";
+    temp8pmID.innerText = Math.round(temp8pm) + "°";
     day1HLID.innerText = `${Math.round(day1High)}${unit} | ${Math.round(day1Low)}${unit}`;
     day2HLID.innerText = `${Math.round(day2High)}${unit} | ${Math.round(day2Low)}${unit}`;
     day3HLID.innerText = `${Math.round(day3High)}${unit} | ${Math.round(day3Low)}${unit}`;
     day4HLID.innerText = `${Math.round(day4High)}${unit} | ${Math.round(day4Low)}${unit}`;
     day5HLID.innerText = `${Math.round(day5High)}${unit} | ${Math.round(day5Low)}${unit}`;
-    day1WeatherIconID.innerText = Description2Icon(day1Weather,  60*60*12, day1WeatherIconID);
-    day2WeatherIconID.innerText = Description2Icon(day2Weather,  60*60*12, day2WeatherIconID);
-    day3WeatherIconID.innerText = Description2Icon(day3Weather,  60*60*12, day3WeatherIconID);
-    day4WeatherIconID.innerText = Description2Icon(day4Weather,  60*60*12, day4WeatherIconID);
-    day5WeatherIconID.innerText = Description2Icon(day5Weather,  60*60*12, day5WeatherIconID);
-    
-    weatherIcon8amID.innerText = Description2Icon(weather8am, 60*60*8, weatherIcon8amID);
-    weatherIcon12pmID.innerText = Description2Icon(weather12pm, 60*60*12, weatherIcon12pmID);
-    weatherIcon8pmID.innerText = Description2Icon(weather8pm, 60*60*20, weatherIcon8pmID);
+    day1WeatherIconID.innerText = Description2Icon(day1Weather, 60 * 60 * 12, day1WeatherIconID);
+    day2WeatherIconID.innerText = Description2Icon(day2Weather, 60 * 60 * 12, day2WeatherIconID);
+    day3WeatherIconID.innerText = Description2Icon(day3Weather, 60 * 60 * 12, day3WeatherIconID);
+    day4WeatherIconID.innerText = Description2Icon(day4Weather, 60 * 60 * 12, day4WeatherIconID);
+    day5WeatherIconID.innerText = Description2Icon(day5Weather, 60 * 60 * 12, day5WeatherIconID);
+
+    weatherIcon8amID.innerText = Description2Icon(weather8am, 60 * 60 * 8, weatherIcon8amID);
+    weatherIcon12pmID.innerText = Description2Icon(weather12pm, 60 * 60 * 12, weatherIcon12pmID);
+    weatherIcon8pmID.innerText = Description2Icon(weather8pm, 60 * 60 * 20, weatherIcon8pmID);
 }
 
 // functions
@@ -434,10 +434,10 @@ function GetCurrentDay(dt) {
 
     let dateString = convertUnixTimeToDate(dt);
 
-    let day = dateString.slice(0,3).toUpperCase();
-    let date = convertDateFormat(dateString.slice(5,11));
+    let day = dateString.slice(0, 3).toUpperCase();
+    let date = convertDateFormat(dateString.slice(5, 11));
 
-    return {day, date, dt};
+    return { day, date, dt };
 }
 
 function GetDayOfWeek(yesterday) {
@@ -445,10 +445,10 @@ function GetDayOfWeek(yesterday) {
     let dt = yesterday.dt + 86400;
     let dateString = convertUnixTimeToDate(dt);
 
-    let day = dateString.slice(0,3).toUpperCase();
-    let date = convertDateFormat(dateString.slice(5,11));
+    let day = dateString.slice(0, 3).toUpperCase();
+    let date = convertDateFormat(dateString.slice(5, 11));
 
-    return {day, date, dt};
+    return { day, date, dt };
 }
 
 function convertUnixTimeToDate(unixTimestamp) {
@@ -561,69 +561,68 @@ function linearRegression(x, y) { //Got help at the following link https://study
     return { slope, intercept };
 }
 
-//#endregion
 
-function Description2Icon(description, dt, element){
+function Description2Icon(description, dt, element) {
 
     nightTime = false;
-    if((dt%86400) > (sunset%86400) || (dt%86400) < (sunrise%86400)){
+    if ((dt % 86400) > (sunset % 86400) || (dt % 86400) < (sunrise % 86400)) {
 
         nightTime = true;
     }
 
     let weatherOptions = ['Tornado', 'Snow', 'Thunderstorm', 'Rain', 'Drizzle', 'Mist', 'Smoke', 'Haze', 'Dust', 'Fog', 'Sand', 'Ash', 'Squall', 'Clouds', 'Clear', 'Partly Cloudy'];
-    let weatherIcons =   ['?' ,       'I' ,       'Y',         'U',     'W',     'Z',     'Z',     'Z',    'Z',   'Z',    'Z',   'Z',     'Z',      '3',     '1' , 'A'  ];
+    let weatherIcons = ['?', 'I', 'Y', 'U', 'W', 'Z', 'Z', 'Z', 'Z', 'Z', 'Z', 'Z', 'Z', '3', '1', 'A'];
     let blue = "UWZA3";
 
 
-    for(let i = 0; i<weatherOptions.length; i++){
+    for (let i = 0; i < weatherOptions.length; i++) {
 
-        if(description == weatherOptions[i]){
-            
-            if(weatherIcons[i] == 1 && nightTime){
+        if (description == weatherOptions[i]) {
+
+            if (weatherIcons[i] == 1 && nightTime) {
                 element.style.color = "#d1c0d8";
                 element.style.fontSize = "250px";
                 element.style.marginLeft = "10px";
                 return 6;
-            }else if(weatherIcons[i] == 1){
+            } else if (weatherIcons[i] == 1) {
                 element.style.color = "#ffc400";
                 return 1;
-            }else if (blue.includes(weatherIcons[i])){
+            } else if (blue.includes(weatherIcons[i])) {
                 element.style.color = "#6dabd1";
                 return weatherIcons[i];
-            }else{
+            } else {
                 element.style.color = "grey";
                 return weatherIcons[i];
             }
-            
+
         }
     }
 
     return "---";
 }
 
-function DetermineTodaysWeather(weathers, n){
+function DetermineTodaysWeather(weathers, n) {
     let weather8am;
     let weather12pm;
     let weather8pm;
-    if(n < 3){
-        weather8am = weathers[2-n];
-        weather12pm = weathers[4-n];
-        weather8pm = weathers[6-n];
-    }else if(n < 5){
-        weather8am = weathers[10-n];
-        weather12pm = weathers[4-n];
-        weather8pm = weathers[6-n];
-    }else if(n < 7){
-        weather8am = weathers[10-n];
-        weather12pm = weathers[12-n];
-        weather8pm = weathers[6-n];
-    }else{
-        weather8am = weathers[10-n];
-        weather12pm = weathers[12-n];
-        weather8pm = weathers[14-n];
+    if (n < 3) {
+        weather8am = weathers[2 - n];
+        weather12pm = weathers[4 - n];
+        weather8pm = weathers[6 - n];
+    } else if (n < 5) {
+        weather8am = weathers[10 - n];
+        weather12pm = weathers[4 - n];
+        weather8pm = weathers[6 - n];
+    } else if (n < 7) {
+        weather8am = weathers[10 - n];
+        weather12pm = weathers[12 - n];
+        weather8pm = weathers[6 - n];
+    } else {
+        weather8am = weathers[10 - n];
+        weather12pm = weathers[12 - n];
+        weather8pm = weathers[14 - n];
     }
-    return{weather8am, weather12pm, weather8pm};
+    return { weather8am, weather12pm, weather8pm };
 }
 
 function DetermineForecastedWeather(weathers, dayNumber, m) {
@@ -633,16 +632,16 @@ function DetermineForecastedWeather(weathers, dayNumber, m) {
     weatherTriggers = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
 
     let cloudCounter = 0;
-    m = m-1;
+    m = m - 1;
 
     if (dayNumber == 5) {
         for (let i = 0; i < m; i++) {
-            console.log(8 * (dayNumber - 1) + (8-m) + i);
-            let currentWeather = weathers[8 * (dayNumber - 1) + (8-m) + i];
-            for(let j = 0; j < 15; j++){
-                if(currentWeather == weatherOptions[j]){
+            console.log(8 * (dayNumber - 1) + (8 - m) + i);
+            let currentWeather = weathers[8 * (dayNumber - 1) + (8 - m) + i];
+            for (let j = 0; j < 15; j++) {
+                if (currentWeather == weatherOptions[j]) {
                     weatherTriggers[j] = true;
-                    if(j==13){
+                    if (j == 13) {
                         cloudCounter++;
                     }
                 }
@@ -650,14 +649,14 @@ function DetermineForecastedWeather(weathers, dayNumber, m) {
             console.log(cloudCounter);
 
         }
-        cloudCounter = cloudCounter*(8/(m-1));
-    }else{
+        cloudCounter = cloudCounter * (8 / (m - 1));
+    } else {
         for (let i = 0; i < 8; i++) {
-            let currentWeather = weathers[8 * (dayNumber-1) + (8-m) + i];
-            for(let j = 0; j < 15; j++){
-                if(currentWeather == weatherOptions[j]){
+            let currentWeather = weathers[8 * (dayNumber - 1) + (8 - m) + i];
+            for (let j = 0; j < 15; j++) {
+                if (currentWeather == weatherOptions[j]) {
                     weatherTriggers[j] = true;
-                    if(j==13){
+                    if (j == 13) {
                         cloudCounter++;
                         console.log(currentWeather);
                     }
@@ -668,12 +667,12 @@ function DetermineForecastedWeather(weathers, dayNumber, m) {
 
     console.log("This is the cloud count " + cloudCounter);
 
-    for(let i = 0; i < 15; i++){
-        if(weatherTriggers[i]){
-            if(i == 13){
-                if(cloudCounter < 3){
+    for (let i = 0; i < 15; i++) {
+        if (weatherTriggers[i]) {
+            if (i == 13) {
+                if (cloudCounter < 3) {
                     return 'Clear';
-                }else if(cloudCounter < 7){
+                } else if (cloudCounter < 7) {
                     return 'Partly Cloudy';
                 }
             }
@@ -687,30 +686,73 @@ function DetermineForecastedWeather(weathers, dayNumber, m) {
 function convertDateFormat(dateString) { //Got help from ChatGPT to make this function real quick
     const dateParts = dateString.split(' '); // Split the date string into parts
     const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    
+
     const monthIndex = monthNames.findIndex(month => month === dateParts[1]);
-    
+
     if (monthIndex !== -1) {
-      const month = (monthIndex + 1).toString().padStart(2, '0'); // Convert month to 'MM' format
-      const day = dateParts[0].padStart(2, '0'); // Convert day to 'DD' format
-      
-      return `${month}/${day}`;
+        const month = (monthIndex + 1).toString().padStart(2, '0'); // Convert month to 'MM' format
+        const day = dateParts[0].padStart(2, '0'); // Convert day to 'DD' format
+
+        return `${month}/${day}`;
     }
-    
+
     return null; // Return null if the month abbreviation is not found
 }
 
 function convertToNormalTime(militaryTime) {
     let hour = parseInt(militaryTime.substring(0, 2), 10);
     let minute = militaryTime.substring(3);
-  
+
     let period = (hour >= 12) ? 'PM' : 'AM';
-  
+
     if (hour === 0) {
-      hour = 12; // 12 AM
+        hour = 12; // 12 AM
     } else if (hour > 12) {
-      hour = hour - 12; // Convert to 12-hour format
+        hour = hour - 12; // Convert to 12-hour format
     }
-  
+
     return `${hour}:${minute} ${period}`;
+}
+
+//#endregion
+
+let currentImage = 1;
+
+function changeImage() {
+    const image = document.getElementById('favoriteBtnID');
+    if (currentImage === 1) {
+        image.src = './assets/FavoriteIcon.png';
+        currentImage = 2;
+    } else {
+        image.src = './assets/FavoritedIcon.png';
+        currentImage = 1;
+    }
+}
+
+function RemoveParent(button) {
+    // Find the parent element of the button
+    var parentElement = button.parentElement;
+
+    // Hide the parent element (set display to none)
+    // parentElement.style.display = 'none';
+
+    // Alternatively, to remove the parent element from the DOM entirely:
+    parentElement.remove();
+}
+
+function CloseGrandParent(button) {
+    // Find the parent element of the button
+    var parentElement = button.parentElement;
+    var grandParentElement = parentElement.parentElement;
+
+    // Hide the parent element (set display to none)
+    grandParentElement.style.display = 'none';
+
+    // Alternatively, to remove the parent element from the DOM entirely:
+    // parentElement.remove();
+}
+
+function OpenFavorites(){
+   var container = document.getElementById("side-containerID");
+   container.style.display = 'block';
 }
