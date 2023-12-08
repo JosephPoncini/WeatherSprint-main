@@ -17,7 +17,7 @@
       <div class="container-fluid">
         <a class="navbar-brand">climate.xchange</a>
         <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search for a City" aria-label="Search">
+          <input class="form-control me-2" type="search" placeholder="Search for a City" aria-label="Search" id="searchTxt">
           <img onclick="search()" id="searchBtnID" src="./assets/SearchBtn.png" alt="search icon">
         </form>
       </div>
@@ -34,7 +34,9 @@
           style="margin-right: 40px;">
       </div>
       <div class="container " style="padding: 0; position: relative; height:93%">
-        <div class="slider">
+        <div id="slider" class="slider">
+
+          <div id="emptyDiv"></div>
 
           <div class="container" style="padding-left: 0; padding-right: 20px; margin-bottom: 20px;">
             <div class="favoritedCity container">
@@ -132,9 +134,9 @@
     <div class="container gridSection">
       <div class="location1">
         <div class="area1">
-          <div id="placeID" class="sublocation1">[place]</div>
+          <div id="placeID" class="sublocation1" style="white-space: nowrap;">[place]</div>
           <div id="heartID" class="sublocation2 image-container">
-            <img onclick="changeImage()" id="favoriteBtnID" src="./assets/FavoriteIcon.png" alt="">
+            <img onclick="favorite()" id="favoriteBtnID" src="./assets/FavoriteIcon.png" alt="">
           </div>
           <div class="sublocation3">
             <div id="currentWeatherIconID">[sun]</div>

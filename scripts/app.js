@@ -17,8 +17,34 @@ if (imperial) {
     unit = "°C"
 }
 
+function search(){
+    APICall1Search();
+    APICall2Search();
+    if (favorited) {
+        const image = document.getElementById('favoriteBtnID');
+        image.src = './assets/FavoriteIcon.png';
+        favorited = false;
+    }
+    newFavoriteElement = document.getElementById("emptyDiv");
+}
+
+let searchTxt = document.getElementById("searchTxt");
+
+searchTxt.addEventListener('keydown', function (event) {
+    console.log(searchTxt.value);
+    if (event.key === "Enter") {
+
+        event.preventDefault();
+        search()
+        searchTxt.value = "";
+    }
+})
+
+
 //Initialize elements
 //#region 
+let newFavoriteElement;
+
 let placeID = document.getElementById("placeID");
 let heartID = document.getElementById("heartID");
 let currentWeatherIconID = document.getElementById("currentWeatherIconID");
@@ -101,6 +127,7 @@ let lat;
 let lon;
 
 let place;
+let country;
 
 let dt;
 let date;
@@ -165,24 +192,60 @@ let sunrise;
 function success(position) {
     lat = position.coords.latitude;
     lon = position.coords.longitude;
-    GetCurrentWeatherData();
-    GetFiveDayData();
+    APICall1();
+    APICall2();
+
 }
 
 function errorFunc(error) {
     console.log(error.message);
 }
 
-async function GetCurrentWeatherData() {
+//async functions
 
+async function APICall1Search(){
 
+    const promise = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${searchTxt.value}&appid=${APIkey}&units=${units}`);
+    const data = await promise.json();
+
+    GetCurrentWeatherData(data)
+
+}
+
+async function APICall2Search() {
+
+    const promise = await fetch(`api.openweathermap.org/data/2.5/forecast?q=${searchTxt.value}&appid=${APIkey}&units=${units}`);
+    const data = await promise.json();
+
+    GetFiveDayData(data);
+}
+
+async function APICall1(){
 
     const promise = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${APIkey}&units=${units}`);
     const data = await promise.json();
 
+    GetCurrentWeatherData(data)
+
+}
+
+async function APICall2() {
+
+    const promise = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${APIkey}&units=${units}`);
+    const data = await promise.json();
+
+    GetFiveDayData(data);
+}
+
+//main functions
+
+function GetCurrentWeatherData(data) {
+
+
     console.log(data);
 
     place = data.name;
+    country = data.sys.country;
 
     dt = data.dt;
     timeZone = data.timezone;
@@ -257,11 +320,7 @@ async function GetCurrentWeatherData() {
 }
 
 
-async function GetFiveDayData() {
-
-    // --------------------------------------- async fetch
-    const promise = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${APIkey}&units=${units}`);
-    const data = await promise.json();
+function GetFiveDayData(data) {
 
     // --------------------------------------- Get Arrays for forecasted temps, max temps, min temps with estimated temps
     let hourOffset = (((timeZone / 3600) % 3) + 3) % 3;
@@ -271,7 +330,6 @@ async function GetFiveDayData() {
     let midMinTemps = FillMinTempArray(data);
     let midTimes = FillTimeArray(data, timeZone)
     let weathers = FillWeatherArray(data);
-    console.log(weathers);
 
     //------------------- estimated temps calcs start here
     //#region 
@@ -396,8 +454,6 @@ async function GetFiveDayData() {
     day4Low = GetDaysMinTemp(minTemps, 4);
     day5Low = GetDaysMinTemp(minTemps, 5);
 
-    console.log(maxTemps);
-    console.log(minTemps);
 
     //---------------------------------------Get 8am 12pm 8pm temps and weather
 
@@ -484,8 +540,6 @@ async function GetFiveDayData() {
     console.log("On Day 3 it will be " + day3Weather);
     console.log("On Day 4 it will be " + day4Weather);
     console.log("On Day 5 it will be " + day5Weather);
-    // console.log(maxTemps);
-    // console.log(minTemps);
 
     // -----------------------------------Displaying values
 
@@ -557,7 +611,7 @@ async function GetFiveDayData() {
     //flag-------------------------------------------------------------------------------------------------------------------------------
 }
 
-// functions
+// other functions
 //#region
 
 function GetCurrentDay(dt) {
@@ -732,8 +786,6 @@ function Description2Icon(description, dt, element) {
 }
 
 function DetermineLastDaysWeather(weathers, m) {
-    console.log("m is " + m);
-    console.log(weathers)
     let weather8am;
     let weather12pm;
     let weather8pm;
@@ -805,7 +857,6 @@ function DetermineForecastedWeather(weathers, dayNumber, m) {
 
     if (dayNumber == 5) {
         for (let i = 0; i < m; i++) {
-            console.log(8 * (dayNumber - 1) + (8 - m) + i);
             let currentWeather = weathers[8 * (dayNumber - 1) + (8 - m) + i];
             for (let j = 0; j < 15; j++) {
                 if (currentWeather == weatherOptions[j]) {
@@ -815,7 +866,6 @@ function DetermineForecastedWeather(weathers, dayNumber, m) {
                     }
                 }
             }
-            console.log(cloudCounter);
 
         }
         cloudCounter = cloudCounter * (8 / (m - 1));
@@ -827,14 +877,12 @@ function DetermineForecastedWeather(weathers, dayNumber, m) {
                     weatherTriggers[j] = true;
                     if (j == 13) {
                         cloudCounter++;
-                        console.log(currentWeather);
                     }
                 }
             }
         }
     }
 
-    console.log("This is the cloud count " + cloudCounter);
 
     for (let i = 0; i < 15; i++) {
         if (weatherTriggers[i]) {
@@ -885,18 +933,70 @@ function convertToNormalTime(militaryTime) {
 
 //#endregion
 
-let currentImage = 0;
+let favorited = false;
 
-function changeImage() {
+function favorite() {
+
+
     const image = document.getElementById('favoriteBtnID');
-    if (currentImage === 1) {
+    if (favorited) {
         image.src = './assets/FavoriteIcon.png';
-        currentImage = 2;
+        favorited = false;
+
+
+        slider.removeChild(newFavoriteElement);
     } else {
         image.src = './assets/FavoritedIcon.png';
-        currentImage = 1;
+        favorited = true;
+
+
+        var div1 = document.createElement('div');
+        var div2 = document.createElement('div');
+        var div3 = document.createElement('div');
+        var img1 = document.createElement('img');
+        
+        div1.className = 'container'; 
+        div1.style.paddingLeft = "0px";
+        div1.style.paddingRight = "20px";
+        div1.style.marginBottom = "20px";
+    
+    
+        div2.className = "favoritedCity container";
+    
+        div3.className = "text";
+    
+        div3.textContent = `${place}, ${country}`;
+    
+        img1.onclick = function() {
+            RemoveParent(this);
+        }
+        img1.className = "x";
+        img1.src = "./assets/X.png";
+        img1.alt = "X";
+    
+        let slider = document.getElementById("slider");
+        let emptyDiv = document.getElementById("emptyDiv");
+        
+        slider.insertBefore(div1, emptyDiv.nextSibling);
+        div1.appendChild(div2);
+        div2.appendChild(div3);
+        div2.appendChild(img1);
+    
+        newFavoriteElement = div1;
+
     }
+
 }
+
+
+
+//   <div class="container" style="padding-left: 0; padding-right: 20px; margin-bottom: 20px;">
+//     <div class="favoritedCity container">
+//       <div class="text">Stockton, California</div>
+//       <img onclick="RemoveParent(this)" class="x" src="./assets/X.png" alt="X">
+//     </div>
+//   </div>
+
 
 function RemoveParent(button) {
     // Find the parent element of the button
@@ -939,7 +1039,6 @@ let day5Forecast = document.getElementById("day5Forecast");
 
 let forecastArray = [day1Forecast, day2Forecast, day3Forecast, day4Forecast, day5Forecast];
 function OpenForecast(index) {
-    console.log(forecastArray[index - 1]);
     let btn = document.getElementById("openFavoritesBtn");
     let trigger = true;
     for (let i = 0; i < 5; i++) {
