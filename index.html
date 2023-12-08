@@ -10,9 +10,9 @@
   <link rel="stylesheet" href="./styles/style.css">
 </head>
 
-<body class="dayGradientBG" style="overflow: hidden;">
+<body>
 
-  <div class="container-fluid d-flex justify-content-center" style="background-color: #f8f9fa;  overflow: hidden;">
+  <div class="container-fluid d-flex justify-content-center" style="background-color: #f8f9fa; ">
     <nav class="navbar bg-body-tertiary">
       <div class="container-fluid">
         <a class="navbar-brand">climate.xchange</a>
@@ -26,13 +26,14 @@
 
 
 
-  <div class="container-fluid" style="overflow: hidden; position: relative; height:100%">
-    <div id="side-containerID" class="side-container">
+  <div class="container-fluid" style=" position: relative; height: auto;">
+    <div id="side-containerID" class="side-container" style="display: none;">
       <div class="container d-flex justify-content-between" style="padding: 0px; margin-bottom:25px;">
         <div class="title">YOUR FAVORITE CITIES</div>
-        <img onclick="CloseGrandParent(this)" class="exitFavoritesBtn" src="./assets/Ps-x-button.png" alt="Exit btn">
+        <img onclick="CloseGrandParent(this)" class="exitFavoritesBtn" src="./assets/Ps-x-button.png" alt="Exit btn"
+          style="margin-right: 40px;">
       </div>
-      <div class="container" style="padding: 0; position: relative; height:100%">
+      <div class="container " style="padding: 0; position: relative; height:93%">
         <div class="slider">
 
           <div class="container" style="padding-left: 0; padding-right: 20px; margin-bottom: 20px;">
@@ -166,36 +167,169 @@
         </div>
       </div>
 
-      <div class="location2 col">
+      <div class="location2 col" onclick="OpenForecast(1)">
         <div id="day1NameID" class="day">[day]</div>
         <div id="day1WeatherIconID" class="weatherIcon">[weatherIcon]</div>
         <div id="day1HLID" class="HighLow">[HL]</div>
       </div>
-      <div class="location3">
+      <div class="location3" onclick="OpenForecast(2)">
         <div id="day2NameID" class="day">[day]</div>
         <div id="day2WeatherIconID" class="weatherIcon">[weatherIcon]</div>
         <div id="day2HLID" class="HighLow">[HL]</div>
       </div>
-      <div class="location4">
+      <div class="location4" onclick="OpenForecast(3)">
         <div id="day3NameID" class="day">[day]</div>
         <div id="day3WeatherIconID" class="weatherIcon">[weatherIcon]</div>
         <div id="day3HLID" class="HighLow">[HL]</div>
       </div>
-      <div class="location5">
+      <div class="location5" onclick="OpenForecast(4)">
         <div id="day4NameID" class="day">[day]</div>
         <div id="day4WeatherIconID" class="weatherIcon">[weatherIcon]</div>
         <div id="day4HLID" class="HighLow">[HL]</div>
       </div>
-      <div class="location6">
+      <div class="location6" onclick="OpenForecast(5)">
         <div id="day5NameID" class="day">[day]</div>
         <div id="day5WeatherIconID" class="weatherIcon">[weatherIcon]</div>
         <div id="day5HLID" class="HighLow">[HL]</div>
       </div>
-      <div class="location7">
-        <button onclick="OpenFavorites()" style="opacity: 75%; width: 350px; color: gray;" type="button" class="btn btn-light"> ♥ Open your
+
+      <div id="openFavoritesBtn" class="location7">
+        <button onclick="OpenFavorites()" style="opacity: 75%; width: 350px; color: gray;" type="button"
+          class="btn btn-light"> ♥ Open your
           favorite
           places</button>
       </div>
+
+      <div id="day1Forecast" class="location8" style="display: none;">
+        <div class="grid">
+          <div class="area1"><div id="DayOfTheWeek1_ForecastName" class="title">
+            [DAY OF THE WEEK]
+          </div></div>
+
+          <div class="area3">
+            <div class="text">8 am</div>
+            <div id="DayOfTheWeek1_8amWeather" class="forecastWeatherIcon">1</div>
+            <div id="DayOfTheWeek1_8amTemp" class="forecastTemp">[50]</div>
+          </div>
+          <div class="area4">
+            <div class="text">noon</div>
+            <div id="DayOfTheWeek1_12pmWeather" class="forecastWeatherIcon">A</div>
+            <div id="DayOfTheWeek1_12pmTemp" class="forecastTemp">[50]</div>
+          </div>
+          <div class="area5">
+            <div class="text">8 pm</div>
+            <div id="DayOfTheWeek1_8pmWeather" class="forecastWeatherIcon">3</div>
+            <div id="DayOfTheWeek1_8pmTemp" class="forecastTemp">[50]</div>
+          </div>
+          <div id="DayOfTheWeek1_ForecastDescription" class="area2"><div class="description">[Description]</div></div>
+        </div>
+
+      </div>
+
+      <div id="day2Forecast" class="location8" style="display: none;" >
+        <div class="grid">
+          <div class="area1"><div id="DayOfTheWeek2_ForecastName" class="title">
+            [DAY OF THE WEEK]
+          </div></div>
+
+          <div class="area3">
+            <div class="text">8 am</div>
+            <div id="DayOfTheWeek2_8amWeather" class="forecastWeatherIcon">1</div>
+            <div id="DayOfTheWeek2_8amTemp" class="forecastTemp">[50]</div>
+          </div>
+          <div class="area4">
+            <div class="text">noon</div>
+            <div id="DayOfTheWeek2_12pmWeather" class="forecastWeatherIcon">A</div>
+            <div id="DayOfTheWeek2_12pmTemp" class="forecastTemp">[50]</div>
+          </div>
+          <div class="area5">
+            <div class="text">8 pm</div>
+            <div id="DayOfTheWeek2_8pmWeather" class="forecastWeatherIcon">3</div>
+            <div id="DayOfTheWeek2_8pmTemp" class="forecastTemp">[50]</div>
+          </div>
+          <div id="DayOfTheWeek2_ForecastDescription" class="area2"><div class="description">[Description]</div></div>
+        </div>
+
+      </div>
+
+      <div id="day3Forecast" class="location8" style="display: none;">
+        <div class="grid">
+          <div class="area1"><div id="DayOfTheWeek3_ForecastName" class="title">
+            [DAY OF THE WEEK]
+          </div></div>
+
+          <div class="area3">
+            <div class="text">8 am</div>
+            <div id="DayOfTheWeek3_8amWeather" class="forecastWeatherIcon">1</div>
+            <div id="DayOfTheWeek3_8amTemp" class="forecastTemp">[50]</div>
+          </div>
+          <div class="area4">
+            <div class="text">noon</div>
+            <div id="DayOfTheWeek3_12pmWeather" class="forecastWeatherIcon">A</div>
+            <div id="DayOfTheWeek3_12pmTemp" class="forecastTemp">[50]</div>
+          </div>
+          <div class="area5">
+            <div class="text">8 pm</div>
+            <div id="DayOfTheWeek3_8pmWeather" class="forecastWeatherIcon">3</div>
+            <div id="DayOfTheWeek3_8pmTemp" class="forecastTemp">[50]</div>
+          </div>
+          <div id="DayOfTheWeek3_ForecastDescription" class="area2"><div class="description">[Description]</div></div>
+        </div>
+
+      </div>
+
+      <div id="day4Forecast" class="location8" style="display: none;">
+        <div class="grid">
+          <div class="area1"><div id="DayOfTheWeek4_ForecastName" class="title">
+            [DAY OF THE WEEK]
+          </div></div>
+
+          <div class="area3">
+            <div class="text">8 am</div>
+            <div id="DayOfTheWeek4_8amWeather" class="forecastWeatherIcon">1</div>
+            <div id="DayOfTheWeek4_8amTemp" class="forecastTemp">[50]</div>
+          </div>
+          <div class="area4">
+            <div class="text">noon</div>
+            <div id="DayOfTheWeek4_12pmWeather" class="forecastWeatherIcon">A</div>
+            <div id="DayOfTheWeek4_12pmTemp" class="forecastTemp">[50]</div>
+          </div>
+          <div class="area5">
+            <div class="text">8 pm</div>
+            <div id="DayOfTheWeek4_8pmWeather" class="forecastWeatherIcon">3</div>
+            <div id="DayOfTheWeek4_8pmTemp" class="forecastTemp">[50]</div>
+          </div>
+          <div id="DayOfTheWeek4_ForecastDescription" class="area2"><div class="description">[Description]</div></div>
+        </div>
+
+      </div>
+
+      <div id="day5Forecast" class="location8" style="display: none;">
+        <div class="grid">
+          <div class="area1"><div id="DayOfTheWeek5_ForecastName" class="title">
+            [DAY OF THE WEEK]
+          </div></div>
+
+          <div class="area3">
+            <div class="text">8 am</div>
+            <div id="DayOfTheWeek5_8amWeather" class="forecastWeatherIcon">1</div>
+            <div id="DayOfTheWeek5_8amTemp" class="forecastTemp">[50]</div>
+          </div>
+          <div class="area4">
+            <div class="text">noon</div>
+            <div id="DayOfTheWeek5_12pmWeather" class="forecastWeatherIcon">A</div>
+            <div id="DayOfTheWeek5_12pmTemp" class="forecastTemp">[50]</div>
+          </div>
+          <div class="area5">
+            <div class="text">8 pm</div>
+            <div id="DayOfTheWeek5_8pmWeather" class="forecastWeatherIcon">3</div>
+            <div id="DayOfTheWeek5_8pmTemp" class="forecastTemp">[50]</div>
+          </div>
+          <div id="DayOfTheWeek5_ForecastDescription" class="area2"><div class="description">[Description]</div></div>
+        </div>
+
+      </div>
+
 
     </div>
   </div>

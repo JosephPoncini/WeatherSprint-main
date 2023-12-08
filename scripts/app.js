@@ -47,6 +47,50 @@ let day4HLID = document.getElementById("day4HLID");
 let day5NameID = document.getElementById("day5NameID");
 let day5WeatherIconID = document.getElementById("day5WeatherIconID");
 let day5HLID = document.getElementById("day5HLID");
+
+let DayOfTheWeek1_ForecastName = document.getElementById("DayOfTheWeek1_ForecastName");
+let DayOfTheWeek1_8amWeather = document.getElementById("DayOfTheWeek1_8amWeather");
+let DayOfTheWeek1_12pmWeather = document.getElementById("DayOfTheWeek1_12pmWeather");
+let DayOfTheWeek1_8pmWeather = document.getElementById("DayOfTheWeek1_8pmWeather");
+let DayOfTheWeek1_8amTemp = document.getElementById("DayOfTheWeek1_8amTemp");
+let DayOfTheWeek1_12pmTemp = document.getElementById("DayOfTheWeek1_12pmTemp");
+let DayOfTheWeek1_8pmTemp = document.getElementById("DayOfTheWeek1_8pmTemp");
+
+let DayOfTheWeek2_ForecastName = document.getElementById("DayOfTheWeek2_ForecastName");
+let DayOfTheWeek2_8amWeather = document.getElementById("DayOfTheWeek2_8amWeather");
+let DayOfTheWeek2_12pmWeather = document.getElementById("DayOfTheWeek2_12pmWeather");
+let DayOfTheWeek2_8pmWeather = document.getElementById("DayOfTheWeek2_8pmWeather");
+let DayOfTheWeek2_8amTemp = document.getElementById("DayOfTheWeek2_8amTemp");
+let DayOfTheWeek2_12pmTemp = document.getElementById("DayOfTheWeek2_12pmTemp");
+let DayOfTheWeek2_8pmTemp = document.getElementById("DayOfTheWeek2_8pmTemp");
+
+let DayOfTheWeek3_ForecastName = document.getElementById("DayOfTheWeek3_ForecastName");
+let DayOfTheWeek3_8amWeather = document.getElementById("DayOfTheWeek3_8amWeather");
+let DayOfTheWeek3_12pmWeather = document.getElementById("DayOfTheWeek3_12pmWeather");
+let DayOfTheWeek3_8pmWeather = document.getElementById("DayOfTheWeek3_8pmWeather");
+let DayOfTheWeek3_8amTemp = document.getElementById("DayOfTheWeek3_8amTemp");
+let DayOfTheWeek3_12pmTemp = document.getElementById("DayOfTheWeek3_12pmTemp");
+let DayOfTheWeek3_8pmTemp = document.getElementById("DayOfTheWeek3_8pmTemp");
+
+let DayOfTheWeek4_ForecastName = document.getElementById("DayOfTheWeek4_ForecastName");
+let DayOfTheWeek4_8amWeather = document.getElementById("DayOfTheWeek4_8amWeather");
+let DayOfTheWeek4_12pmWeather = document.getElementById("DayOfTheWeek4_12pmWeather");
+let DayOfTheWeek4_8pmWeather = document.getElementById("DayOfTheWeek4_8pmWeather");
+let DayOfTheWeek4_8amTemp = document.getElementById("DayOfTheWeek4_8amTemp");
+let DayOfTheWeek4_12pmTemp = document.getElementById("DayOfTheWeek4_12pmTemp");
+let DayOfTheWeek4_8pmTemp = document.getElementById("DayOfTheWeek4_8pmTemp");
+
+let DayOfTheWeek5_ForecastName = document.getElementById("DayOfTheWeek5_ForecastName");
+let DayOfTheWeek5_8amWeather = document.getElementById("DayOfTheWeek5_8amWeather");
+let DayOfTheWeek5_12pmWeather = document.getElementById("DayOfTheWeek5_12pmWeather");
+let DayOfTheWeek5_8pmWeather = document.getElementById("DayOfTheWeek5_8pmWeather");
+let DayOfTheWeek5_8amTemp = document.getElementById("DayOfTheWeek5_8amTemp");
+let DayOfTheWeek5_12pmTemp = document.getElementById("DayOfTheWeek5_12pmTemp");
+let DayOfTheWeek5_8pmTemp = document.getElementById("DayOfTheWeek5_8pmTemp");
+
+//flag-------------------------------------------------------------------------------------------------------------------
+
+
 //#endregion
 
 // Initialize data variables
@@ -198,6 +242,15 @@ async function GetCurrentWeatherData() {
     day3NameID.innerText = `${day3Name.day} ${day3Name.date}`;
     day4NameID.innerText = `${day4Name.day} ${day4Name.date}`;
     day5NameID.innerText = `${day5Name.day} ${day5Name.date}`;
+
+    DayOfTheWeek1_ForecastName.innerText = DayOfWeekElongated(day1Name.day);
+    DayOfTheWeek2_ForecastName.innerText = DayOfWeekElongated(day2Name.day);
+    DayOfTheWeek3_ForecastName.innerText = DayOfWeekElongated(day3Name.day);
+    DayOfTheWeek4_ForecastName.innerText = DayOfWeekElongated(day4Name.day);
+    DayOfTheWeek5_ForecastName.innerText = DayOfWeekElongated(day5Name.day);
+
+    //flag-------------------------------------------------------------------------------------------------------------------
+
     currentWeatherIconID.innerText = Description2Icon(currentWeatherMain, dt + timeZone, currentWeatherIconID);
     timeID.innerText = convertToNormalTime(currentTime);
 
@@ -305,12 +358,24 @@ async function GetFiveDayData() {
         laterMinTemps[i - 1] = parseFloat((regressionLine.slope * laterTime[i - 1] + regressionLine.intercept).toFixed(3));
     }
 
+    let laterTemps = [];
+    for (let i = 1; i < m; i++) {
+        let x = [];
+        let y = [];
+        for (let j = 0; j < 5; j++) {
+            x[j] = midTimes[(8 - m) + (j * 8) + i];
+            y[j] = midTemps[(8 - m) + (j * 8) + i];
+        }
+        let regressionLine = linearRegression(x, y);
+        laterTemps[i - 1] = parseFloat((regressionLine.slope * laterTime[i - 1] + regressionLine.intercept).toFixed(3));
+    }
+
 
     //#endregion
     //------------------- estimated temps calcs end here
 
     // ------------------- arrays assembled
-    temps = [...earlyTemps, ...midTemps, ...lateZeros];
+    temps = [...earlyTemps, ...midTemps, ...laterTemps];
     maxTemps = [...earlyMaxTemps, ...midMaxTemps, ...laterMinTemps];
     minTemps = [...earlyMinTemps, ...midMinTemps, ...laterMinTemps];
     timeArray = [...earlierTime, ...midTimes, ...laterTime];
@@ -372,6 +437,23 @@ async function GetFiveDayData() {
     day4Weather = DetermineForecastedWeather(weathers, 4, m);
     day5Weather = DetermineForecastedWeather(weathers, 5, m);
 
+    //day1Forecasted
+    let day1WeatherForecast = DetermineDaysWeather(weathers, n, 1);
+    let day2WeatherForecast = DetermineDaysWeather(weathers, n, 2);
+    let day3WeatherForecast = DetermineDaysWeather(weathers, n, 3);
+    let day4WeatherForecast = DetermineDaysWeather(weathers, n, 4);
+    let day5WeatherForecast = DetermineLastDaysWeather(weathers, m);
+
+    let day1WeatherTemps = GetWeatherTemp(hourOffset, 1);
+    let day2WeatherTemps = GetWeatherTemp(hourOffset, 2);
+    let day3WeatherTemps = GetWeatherTemp(hourOffset, 3);
+    let day4WeatherTemps = GetWeatherTemp(hourOffset, 4);
+    let day5WeatherTemps = GetWeatherTemp(hourOffset, 5);
+
+
+    //flag-------------------------------------------------------------------------------------------------------------------
+
+
 
 
 
@@ -425,6 +507,54 @@ async function GetFiveDayData() {
     weatherIcon8amID.innerText = Description2Icon(weather8am, 60 * 60 * 8, weatherIcon8amID);
     weatherIcon12pmID.innerText = Description2Icon(weather12pm, 60 * 60 * 12, weatherIcon12pmID);
     weatherIcon8pmID.innerText = Description2Icon(weather8pm, 60 * 60 * 20, weatherIcon8pmID);
+
+    //-------------------------------------------------------------------------------------------------------------------------------
+
+    DayOfTheWeek1_8amWeather.innerText = Description2Icon(day1WeatherForecast.weather8am, 60 * 60 * 8, DayOfTheWeek1_8amWeather);
+    DayOfTheWeek1_12pmWeather.innerText = Description2Icon(day1WeatherForecast.weather12pm, 60 * 60 * 12, DayOfTheWeek1_12pmWeather);
+    DayOfTheWeek1_8pmWeather.innerText = Description2Icon(day1WeatherForecast.weather8pm, 60 * 60 * 20, DayOfTheWeek1_8pmWeather);
+
+    DayOfTheWeek1_8amTemp.innerText = Math.round(day1WeatherTemps.temp8am) + "°";
+    DayOfTheWeek1_12pmTemp.innerText = Math.round(day1WeatherTemps.temp12pm) + "°";
+    DayOfTheWeek1_8pmTemp.innerText = Math.round(day1WeatherTemps.temp8pm) + "°";
+
+
+    DayOfTheWeek2_8amWeather.innerText = Description2Icon(day2WeatherForecast.weather8am, 60 * 60 * 8, DayOfTheWeek2_8amWeather);
+    DayOfTheWeek2_12pmWeather.innerText = Description2Icon(day2WeatherForecast.weather12pm, 60 * 60 * 12, DayOfTheWeek2_12pmWeather);
+    DayOfTheWeek2_8pmWeather.innerText = Description2Icon(day2WeatherForecast.weather8pm, 60 * 60 * 20, DayOfTheWeek2_8pmWeather);
+
+    DayOfTheWeek2_8amTemp.innerText = Math.round(day2WeatherTemps.temp8am) + "°";
+    DayOfTheWeek2_12pmTemp.innerText = Math.round(day2WeatherTemps.temp12pm) + "°";
+    DayOfTheWeek2_8pmTemp.innerText = Math.round(day2WeatherTemps.temp8pm) + "°";
+
+    DayOfTheWeek3_8amWeather.innerText = Description2Icon(day3WeatherForecast.weather8am, 60 * 60 * 8, DayOfTheWeek3_8amWeather);
+    DayOfTheWeek3_12pmWeather.innerText = Description2Icon(day3WeatherForecast.weather12pm, 60 * 60 * 12, DayOfTheWeek3_12pmWeather);
+    DayOfTheWeek3_8pmWeather.innerText = Description2Icon(day3WeatherForecast.weather8pm, 60 * 60 * 20, DayOfTheWeek3_8pmWeather);
+
+    DayOfTheWeek3_8amTemp.innerText = Math.round(day3WeatherTemps.temp8am) + "°";
+    DayOfTheWeek3_12pmTemp.innerText = Math.round(day3WeatherTemps.temp12pm) + "°";
+    DayOfTheWeek3_8pmTemp.innerText = Math.round(day3WeatherTemps.temp8pm) + "°";
+
+    DayOfTheWeek4_8amWeather.innerText = Description2Icon(day4WeatherForecast.weather8am, 60 * 60 * 8, DayOfTheWeek4_8amWeather);
+    DayOfTheWeek4_12pmWeather.innerText = Description2Icon(day4WeatherForecast.weather12pm, 60 * 60 * 12, DayOfTheWeek4_12pmWeather);
+    DayOfTheWeek4_8pmWeather.innerText = Description2Icon(day4WeatherForecast.weather8pm, 60 * 60 * 20, DayOfTheWeek4_8pmWeather);
+
+    DayOfTheWeek4_8amTemp.innerText = Math.round(day4WeatherTemps.temp8am) + "°";
+    DayOfTheWeek4_12pmTemp.innerText = Math.round(day4WeatherTemps.temp12pm) + "°";
+    DayOfTheWeek4_8pmTemp.innerText = Math.round(day4WeatherTemps.temp8pm) + "°";
+
+    DayOfTheWeek5_8amWeather.innerText = Description2Icon(day5WeatherForecast.weather8am, 60 * 60 * 8, DayOfTheWeek5_8amWeather);
+    DayOfTheWeek5_12pmWeather.innerText = Description2Icon(day5WeatherForecast.weather12pm, 60 * 60 * 12, DayOfTheWeek5_12pmWeather);
+    DayOfTheWeek5_8pmWeather.innerText = Description2Icon(day5WeatherForecast.weather8pm, 60 * 60 * 20, DayOfTheWeek5_8pmWeather);
+
+    DayOfTheWeek5_8amTemp.innerText = Math.round(day5WeatherTemps.temp8am) + "°";
+    DayOfTheWeek5_12pmTemp.innerText = Math.round(day5WeatherTemps.temp12pm) + "°";
+    DayOfTheWeek5_8pmTemp.innerText = Math.round(day5WeatherTemps.temp8pm) + "°";
+
+
+
+
+    //flag-------------------------------------------------------------------------------------------------------------------------------
 }
 
 // functions
@@ -580,8 +710,8 @@ function Description2Icon(description, dt, element) {
         if (description == weatherOptions[i]) {
 
             if (weatherIcons[i] == 1 && nightTime) {
-                element.style.color = "#d1c0d8";
-                element.style.fontSize = "250px";
+                element.style.color = "#8679BE";  //#d1c0d8
+                element.style.fontSize = "200px";
                 element.style.marginLeft = "10px";
                 return 6;
             } else if (weatherIcons[i] == 1) {
@@ -600,6 +730,32 @@ function Description2Icon(description, dt, element) {
 
     return "---";
 }
+
+function DetermineLastDaysWeather(weathers, m) {
+    console.log("m is " + m);
+    console.log(weathers)
+    let weather8am;
+    let weather12pm;
+    let weather8pm;
+    if (m > 5) { //(8-m < 3) = m > 5
+        weather8am = weathers[m + 38 - 8];
+        weather12pm = weathers[m + 36 - 8];
+        weather8pm = weathers[m + 34 - 8];
+    } else if (m > 3) { //(8-m < 5) = m > 3
+        weather8am = weathers[m + 38 - 8];
+        weather12pm = weathers[m + 36 - 8];
+        weather8pm = weathers[m + 42 - 8];
+    } else if (m > 1) {// (8-m) < 7 = m > 1
+        weather8am = weathers[m + 38 - 8];
+        weather12pm = weathers[m + 44 - 8];
+        weather8pm = weathers[m + 42 - 8];
+    } else {
+        weather8am = weathers[m + 46 - 8];
+        weather12pm = weathers[m + 44 - 8];
+        weather8pm = weathers[m + 42 - 8];
+    }
+    return { weather8am, weather12pm, weather8pm };
+};
 
 function DetermineTodaysWeather(weathers, n) {
     let weather8am;
@@ -622,6 +778,19 @@ function DetermineTodaysWeather(weathers, n) {
         weather12pm = weathers[12 - n];
         weather8pm = weathers[14 - n];
     }
+    return { weather8am, weather12pm, weather8pm };
+};
+
+function DetermineDaysWeather(weathers, n, dayNumber) {
+
+    let weather8am;
+    let weather12pm;
+    let weather8pm;
+
+    weather8am = weathers[(2 - n) + (8 * dayNumber)]; //m +6 + 40
+    weather12pm = weathers[(4 - n) + (8 * dayNumber)];//m + 4 + 40
+    weather8pm = weathers[(6 - n) + (8 * dayNumber)];// m + 2 + 40
+
     return { weather8am, weather12pm, weather8pm };
 }
 
@@ -716,7 +885,7 @@ function convertToNormalTime(militaryTime) {
 
 //#endregion
 
-let currentImage = 1;
+let currentImage = 0;
 
 function changeImage() {
     const image = document.getElementById('favoriteBtnID');
@@ -752,7 +921,115 @@ function CloseGrandParent(button) {
     // parentElement.remove();
 }
 
-function OpenFavorites(){
-   var container = document.getElementById("side-containerID");
-   container.style.display = 'block';
+function OpenFavorites() {
+    var container = document.getElementById("side-containerID");
+    container.style.display = 'block';
+}
+
+let forecastOpen = false;
+let forecastDisplayedArray = [false, false, false, false, false];
+
+let day1Forecast = document.getElementById("day1Forecast");
+let day2Forecast = document.getElementById("day2Forecast");
+let day3Forecast = document.getElementById("day3Forecast");
+let day4Forecast = document.getElementById("day4Forecast");
+let day5Forecast = document.getElementById("day5Forecast");
+
+
+
+let forecastArray = [day1Forecast, day2Forecast, day3Forecast, day4Forecast, day5Forecast];
+function OpenForecast(index) {
+    console.log(forecastArray[index - 1]);
+    let btn = document.getElementById("openFavoritesBtn");
+    let trigger = true;
+    for (let i = 0; i < 5; i++) {
+
+        if (forecastDisplayedArray[i]) {
+            if ((i == index - 1)&&trigger) {
+                forecastArray[i].style.display = "none";
+                forecastDisplayedArray[i] = false;
+                btn.classList.toggle("location7");
+                btn.classList.toggle("location7B");
+            } else if(trigger){
+                forecastArray[i].style.display = "none";
+                forecastDisplayedArray[i] = false;
+                forecastArray[index-1].style.display = "";
+                forecastDisplayedArray[index-1] = true;
+            }
+            trigger = false;
+        }
+    }
+    if (trigger) {
+        forecastArray[index-1].style.display = "";
+        forecastDisplayedArray[index-1] = true;
+        btn.classList.toggle("location7");
+        btn.classList.toggle("location7B");
+    }
+
+
+
+
+
+
+}
+
+function DayOfWeekElongated(WWW) {
+    WWW = WWW.toUpperCase();
+    switch (WWW) {
+        case "MON":
+            return "MONDAY";
+            break;
+        case "TUE":
+            return "TUESDAY";
+            break;
+        case "WED":
+            return "WEDNESDAY";
+            break;
+        case "THU":
+            return "THURSDAY";
+            break;
+        case "FRI":
+            return "FRIDAY";
+            break;
+        case "SAT":
+            return "SATURDAY";
+            break;
+        case "SUN":
+            return "SUNDAY";
+            break;
+        default:
+            return "Err"
+
+    }
+}
+
+function GetWeatherTemp(hourOffset, dayNumber) {
+
+    let temp8am;
+    let temp12pm;
+    let temp8pm;
+
+    let x = dayNumber * 8;
+
+    switch (hourOffset) {
+        case 0:
+            temp8am = ((temps[2 + x] + (2 * temps[3 + x])) / 3).toFixed(2);
+            temp12pm = temps[4 + x].toFixed(2);
+            temp8pm = ((temps[6 + x] + (2 * temps[7 + x])) / 3).toFixed(2);
+            break;
+        case 1:
+            temp8am = (((2 * temps[2 + x]) + temps[3 + x]) / 3).toFixed(2);
+            temp12pm = ((temps[3 + x] + (2 * temps[4 + x])) / 3).toFixed(2);
+            temp8pm = (((2 * temps[6 + x]) + temps[7 + x]) / 3).toFixed(2);
+            break;
+        case 2:
+            temp8am = temps[2 + x].toFixed(2);
+            temp12pm = (((2 * temps[3]) + temps[4 + x]) / 3).toFixed(2);
+            temp8pm = temps[6 + x].toFixed(2);
+            break;
+        default:
+            break;
+    }
+
+    return { temp8am, temp12pm, temp8pm };
 }
