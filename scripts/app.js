@@ -41,6 +41,19 @@ function ChangeUnits(){
     APICall2();
 }
 
+function Go(button){
+    let child = button.querySelector('div');
+
+    APICall1Go(child.innerText);
+    APICall2Go(child.innerText);
+    if (favorited) {
+        const image = document.getElementById('favoriteBtnID');
+        image.src = './assets/FavoriteIcon.png';
+        favorited = false;
+    }
+    newFavoriteElement = document.getElementById("emptyDiv");
+}
+
 function search(){
     APICall1Search();
     APICall2Search();
@@ -232,6 +245,23 @@ function errorFunc(error) {
 }
 
 //async functions
+
+async function APICall1Go(cityStr){
+
+    const promise = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityStr}&appid=${APIkey}&units=${units}`);
+    const data = await promise.json();
+
+    GetCurrentWeatherData(data)
+
+}
+
+async function APICall2Go(cityStr){
+
+    const promise = await fetch(`api.openweathermap.org/data/2.5/forecast?q=${cityStr}&appid=${APIkey}&units=${units}`);
+    const data = await promise.json();
+
+    GetFiveDayData(data);
+}
 
 async function APICall1Search(){
 
@@ -998,6 +1028,9 @@ function favorite() {
     
     
         div2.className = "favoritedCity container";
+        div2.onclick = function() {
+            Go(this);
+        }
     
         div3.className = "text";
     

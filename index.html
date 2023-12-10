@@ -19,7 +19,8 @@
       <div class="container-fluid">
         <a class="navbar-brand">climate.xchange</a>
         <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search for a City" aria-label="Search" id="searchTxt">
+          <input class="form-control me-2" type="search" placeholder="Search for a City" aria-label="Search"
+            id="searchTxt">
           <img onclick="search()" id="searchBtnID" src="./assets/SearchBtn.png" alt="search icon">
         </form>
       </div>
@@ -31,7 +32,7 @@
 
 
   <div class="container-fluid bg" style=" position: relative; height: max-content; overflow: hidden; z-index: 1;">
-  <img class="sun" src="./assets/Sun.png" alt="Sun">
+    <img class="sun" src="./assets/Sun.png" alt="Sun">
 
     <div id="side-containerID" class="side-container" style="display: none;">
       <div class="container d-flex justify-content-between" style="padding: 0px; margin-bottom:25px;">
@@ -43,90 +44,6 @@
         <div id="slider" class="slider">
 
           <div id="emptyDiv"></div>
-
-          <div class="container" style="padding-left: 0; padding-right: 20px; margin-bottom: 20px;">
-            <div class="favoritedCity container">
-              <div class="text">Stockton, California</div>
-              <img onclick="RemoveParent(this)" class="x" src="./assets/X.png" alt="X">
-            </div>
-          </div>
-
-          <div class="container" style="padding-left: 0; padding-right: 20px; margin-bottom: 20px;">
-            <div class="favoritedCity container">
-              <div class="text">Stockton, California</div>
-              <img onclick="RemoveParent(this)" class="x" src="./assets/X.png" alt="X">
-            </div>
-          </div>
-
-          <div class="container" style="padding-left: 0; padding-right: 20px; margin-bottom: 20px;">
-            <div class="favoritedCity container">
-              <div class="text">Stockton, California</div>
-              <img onclick="RemoveParent(this)" class="x" src="./assets/X.png" alt="X">
-            </div>
-          </div>
-
-          <div class="container" style="padding-left: 0; padding-right: 20px; margin-bottom: 20px;">
-            <div class="favoritedCity container">
-              <div class="text">Stockton, California</div>
-              <img onclick="RemoveParent(this)" class="x" src="./assets/X.png" alt="X">
-            </div>
-          </div>
-
-          <div class="container" style="padding-left: 0; padding-right: 20px; margin-bottom: 20px;">
-            <div class="favoritedCity container">
-              <div class="text">Stockton, California</div>
-              <img onclick="RemoveParent(this)" class="x" src="./assets/X.png" alt="X">
-            </div>
-          </div>
-
-          <div class="container" style="padding-left: 0; padding-right: 20px; margin-bottom: 20px;">
-            <div class="favoritedCity container">
-              <div class="text">Stockton, California</div>
-              <img onclick="RemoveParent(this)" class="x" src="./assets/X.png" alt="X">
-            </div>
-          </div>
-
-          <div class="container" style="padding-left: 0; padding-right: 20px; margin-bottom: 20px;">
-            <div class="favoritedCity container">
-              <div class="text">Stockton, California</div>
-              <img onclick="RemoveParent(this)" class="x" src="./assets/X.png" alt="X">
-            </div>
-          </div>
-
-          <div class="container" style="padding-left: 0; padding-right: 20px; margin-bottom: 20px;">
-            <div class="favoritedCity container">
-              <div class="text">Stockton, California</div>
-              <img onclick="RemoveParent(this)" class="x" src="./assets/X.png" alt="X">
-            </div>
-          </div>
-
-          <div class="container" style="padding-left: 0; padding-right: 20px; margin-bottom: 20px;">
-            <div class="favoritedCity container">
-              <div class="text">Stockton, California</div>
-              <img onclick="RemoveParent(this)" class="x" src="./assets/X.png" alt="X">
-            </div>
-          </div>
-
-          <div class="container" style="padding-left: 0; padding-right: 20px; margin-bottom: 20px;">
-            <div class="favoritedCity container">
-              <div class="text">Stockton, California</div>
-              <img onclick="RemoveParent(this)" class="x" src="./assets/X.png" alt="X">
-            </div>
-          </div>
-
-          <div class="container" style="padding-left: 0; padding-right: 20px; margin-bottom: 20px;">
-            <div class="favoritedCity container">
-              <div class="text">Stockton, California</div>
-              <img onclick="RemoveParent(this)" class="x" src="./assets/X.png" alt="X">
-            </div>
-          </div>
-
-          <div class="container" style="padding-left: 0; padding-right: 20px; margin-bottom: 20px;">
-            <div class="favoritedCity container">
-              <div class="text">Stockton, California</div>
-              <img onclick="RemoveParent(this)" class="x" src="./assets/X.png" alt="X">
-            </div>
-          </div>
 
 
 
@@ -206,14 +123,17 @@
           class="btn btn-light align-self-center align-items-center"> ♥ Open your
           favorite
           places</button>
-          <div onclick="ChangeUnits()" id="changeUnitsID" class="d-flex align-self-center p-3" style="color: white;">temperature view: Fahrenheit (click to change)</div>
+        <div onclick="ChangeUnits()" id="changeUnitsID" class="d-flex align-self-center p-3" style="color: white;">
+          temperature view: Fahrenheit (click to change)</div>
       </div>
 
       <div id="day1Forecast" class="location8" style="display: none;">
         <div class="grid">
-          <div class="area1"><div id="DayOfTheWeek1_ForecastName" class="title">
-            [DAY OF THE WEEK]
-          </div></div>
+          <div class="area1">
+            <div id="DayOfTheWeek1_ForecastName" class="title">
+              [DAY OF THE WEEK]
+            </div>
+          </div>
 
           <div class="area3">
             <div class="text">8 am</div>
@@ -230,16 +150,20 @@
             <div id="DayOfTheWeek1_8pmWeather" class="forecastWeatherIcon">3</div>
             <div id="DayOfTheWeek1_8pmTemp" class="forecastTemp">[50]</div>
           </div>
-          <div  class="area2"><div id="DayOfTheWeek1_ForecastDescription" class="description">[Description]</div></div>
+          <div class="area2">
+            <div id="DayOfTheWeek1_ForecastDescription" class="description">[Description]</div>
+          </div>
         </div>
 
       </div>
 
-      <div id="day2Forecast" class="location8" style="display: none;" >
+      <div id="day2Forecast" class="location8" style="display: none;">
         <div class="grid">
-          <div class="area1"><div id="DayOfTheWeek2_ForecastName" class="title">
-            [DAY OF THE WEEK]
-          </div></div>
+          <div class="area1">
+            <div id="DayOfTheWeek2_ForecastName" class="title">
+              [DAY OF THE WEEK]
+            </div>
+          </div>
 
           <div class="area3">
             <div class="text">8 am</div>
@@ -256,16 +180,20 @@
             <div id="DayOfTheWeek2_8pmWeather" class="forecastWeatherIcon">3</div>
             <div id="DayOfTheWeek2_8pmTemp" class="forecastTemp">[50]</div>
           </div>
-          <div  class="area2"><div id="DayOfTheWeek2_ForecastDescription" class="description">[Description]</div></div>
+          <div class="area2">
+            <div id="DayOfTheWeek2_ForecastDescription" class="description">[Description]</div>
+          </div>
         </div>
 
       </div>
 
       <div id="day3Forecast" class="location8" style="display: none;">
         <div class="grid">
-          <div class="area1"><div id="DayOfTheWeek3_ForecastName" class="title">
-            [DAY OF THE WEEK]
-          </div></div>
+          <div class="area1">
+            <div id="DayOfTheWeek3_ForecastName" class="title">
+              [DAY OF THE WEEK]
+            </div>
+          </div>
 
           <div class="area3">
             <div class="text">8 am</div>
@@ -282,16 +210,20 @@
             <div id="DayOfTheWeek3_8pmWeather" class="forecastWeatherIcon">3</div>
             <div id="DayOfTheWeek3_8pmTemp" class="forecastTemp">[50]</div>
           </div>
-          <div  class="area2"><div id="DayOfTheWeek3_ForecastDescription" class="description">[Description]</div></div>
+          <div class="area2">
+            <div id="DayOfTheWeek3_ForecastDescription" class="description">[Description]</div>
+          </div>
         </div>
 
       </div>
 
       <div id="day4Forecast" class="location8" style="display: none;">
         <div class="grid">
-          <div class="area1"><div id="DayOfTheWeek4_ForecastName" class="title">
-            [DAY OF THE WEEK]
-          </div></div>
+          <div class="area1">
+            <div id="DayOfTheWeek4_ForecastName" class="title">
+              [DAY OF THE WEEK]
+            </div>
+          </div>
 
           <div class="area3">
             <div class="text">8 am</div>
@@ -308,16 +240,20 @@
             <div id="DayOfTheWeek4_8pmWeather" class="forecastWeatherIcon">3</div>
             <div id="DayOfTheWeek4_8pmTemp" class="forecastTemp">[50]</div>
           </div>
-          <div  class="area2"><div id="DayOfTheWeek4_ForecastDescription" class="description">[Description]</div></div>
+          <div class="area2">
+            <div id="DayOfTheWeek4_ForecastDescription" class="description">[Description]</div>
+          </div>
         </div>
 
       </div>
 
       <div id="day5Forecast" class="location8" style="display: none;">
         <div class="grid">
-          <div class="area1"><div id="DayOfTheWeek5_ForecastName" class="title">
-            [DAY OF THE WEEK]
-          </div></div>
+          <div class="area1">
+            <div id="DayOfTheWeek5_ForecastName" class="title">
+              [DAY OF THE WEEK]
+            </div>
+          </div>
 
           <div class="area3">
             <div class="text">8 am</div>
@@ -334,7 +270,9 @@
             <div id="DayOfTheWeek5_8pmWeather" class="forecastWeatherIcon">3</div>
             <div id="DayOfTheWeek5_8pmTemp" class="forecastTemp">[50]</div>
           </div>
-          <div  class="area2"><div id="DayOfTheWeek5_ForecastDescription" class="description">[Description]</div></div>
+          <div class="area2">
+            <div id="DayOfTheWeek5_ForecastDescription" class="description">[Description]</div>
+          </div>
         </div>
 
       </div>
@@ -343,9 +281,9 @@
     </div>
 
 
-  <div class="container-fluid footer d-flex justify-content-center" style="color: white; margin-top: 30px;">
-    Handcrafted by Joseph
-  </div>
+    <div class="container-fluid footer d-flex justify-content-center" style="color: white; margin-top: 30px;">
+      Handcrafted by Joseph
+    </div>
 
   </div>
 
@@ -354,7 +292,7 @@
   <!-- regression line script -->
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/regression/1.4.1/regression.min.js"></script> -->
 
-  <script  src="/scripts/app.js"></script>
+  <script src="/scripts/app.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
     crossorigin="anonymous"></script>
